@@ -49,7 +49,7 @@ const handleSignUp = async () => {
           role: value // You can set the role to a default value or ask the user to select their role during sign-up.
         });
       });
-      alert("Your account was created successfully.")
+      alert("User Added Successfully")
       navigation.replace('Login');
     } catch (error) {
       console.log(error.message)

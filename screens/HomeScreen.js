@@ -69,6 +69,9 @@ const HomeScreen = () => {
   const handleAddUser = () => {
     navigation.replace("Register")
   }
+  const handleDeleteUser = () => {
+    navigation.replace("Users")
+  }
 
   
 
@@ -579,7 +582,7 @@ useEffect(() => {
                     </View>
                   </TouchableOpacity>
                       { userData?.role == 'Admin' ?   
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={handleDeleteUser}>
                     <View
                       style={{
                         flexDirection: "row",

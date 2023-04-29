@@ -8,7 +8,7 @@ import ResetScreen from './screens/ResetScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import 'react-native-gesture-handler';
 import registerNNPushToken from 'native-notify';
-import InfosScreen from './screens/InfosScreen';
+import UserdataScreen from './screens/UserdataScreen';
 
 
 
@@ -25,7 +25,7 @@ export default function App() {
         <Stack.Screen options={{ headerShown : false}} name="Home" component={HomeScreen} />
         <Stack.Screen options={{ headerShown : false}} name="Reset" component={ResetScreen} />
         <Stack.Screen options={{ headerShown : false}} name="Register" component={RegisterScreen} />
-        <Stack.Screen options={{ headerShown : false}} name="Infos" component={InfosScreen} />
+        <Stack.Screen options={{ headerShown : false}} name="Users" component={UserdataScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
