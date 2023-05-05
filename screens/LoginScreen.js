@@ -44,8 +44,11 @@ const LoginScreen = () => {
       console.log(username);
     
       // Query Firestore for the user document with the matching username
-      const searchQ = query(userSearch, where("username", "==", username));
-      const querySnapshot = await getDocs(searchQ);
+      try{
+        const searchQ = query(userSearch, where("username", "==", username));
+        const querySnapshot = await getDocs(searchQ);
+      
+     
     
       let email = null; // Initialize email to null
     
@@ -72,6 +75,9 @@ const LoginScreen = () => {
       } else {
         alert("USER Doesn't exist");
       }
+    }catch(error){
+        return alert(error)
+       }
     };
     
 

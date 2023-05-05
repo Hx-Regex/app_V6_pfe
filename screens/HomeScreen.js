@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconX from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect } from 'react'
 import { doc, setDoc, getDocs,getDoc , collection, query, where } from "firebase/firestore";
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 const HomeScreen = () => {
       
@@ -23,6 +24,9 @@ const HomeScreen = () => {
   const [Humidity, setHumidity] = useState(0)
   const [windowMGR, setWindowMGR] = useState(false)
   const [windowAuto, setWindowAuto] = useState(false)
+
+
+
   const [tempNotif, setTempNotif] = useState(false)
   const [testauth , setTestauth] = useState('')
   const [userData, setUserData] = useState(null)
@@ -73,6 +77,37 @@ const HomeScreen = () => {
     navigation.replace("Users")
   }
 
+  const writeAutoWind = async () => {
+    const allRef = ref(db, 'All');
+    const allSnapshot = await get(allRef);
+    const allValue = allSnapshot.val();
+    
+    const updatedAllValue = {
+      ...allValue,
+      Auto: !windowAuto,
+      Window: false,
+    };
+    
+    set(allRef, updatedAllValue);
+    
+  };
+  const writeOpenWindow = async () => {
+    if(!windowAuto){
+      const allRef = ref(db, 'All');
+      const allSnapshot = await get(allRef);
+      const allValue = allSnapshot.val();
+      
+      const updatedAllValue = {
+        ...allValue,
+        Window: !windowMGR
+      };
+      
+      set(allRef, updatedAllValue);
+
+    }
+  
+  };
+
   
 
 
@@ -102,22 +137,32 @@ useEffect(() => {
   getDataFromDb()
   const interval = setInterval(() => {
     
-    const Tempdir = ref(db, 'Air/Temp');
+    const Tempdir = ref(db, 'All/Temp');
     onValue(Tempdir, (snapshot) => {
       const data = snapshot.val();
       setTemperature(data);
     });
 
-    const Stockdir = ref(db, 'Stock/Coffe');
+    const Stockdir = ref(db, 'All/Coffee');
     onValue(Stockdir, (snapshot) => {
       const data = snapshot.val();
       setStock(data)
     });
 
-    const Humiddir = ref(db, 'Air/Humid');
+    const Humiddir = ref(db, 'All/Humid');
     onValue(Humiddir, (snapshot) => {
       const data = snapshot.val();
       setHumidity(data)
+    });
+    const AutoWind = ref(db, 'All/Auto');
+    onValue(AutoWind, (snapshot) => {
+      const data = snapshot.val();
+      setWindowAuto(data)
+    });
+    const WindState = ref(db, 'All/Window');
+    onValue(WindState, (snapshot) => {
+      const data = snapshot.val();
+      setWindowMGR(data)
     });
 
 
@@ -213,25 +258,25 @@ useEffect(() => {
                 <View style={styles.stats}>
                   <View
                     style={{
-                      width: "35%",
-                      height: "55%",
+                      width: scale(50),
+                      height: scale(50),
                       borderRadius: 100,
                       backgroundColor: "#9ca2ff",
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <Icon name="fire" size={30} color="white" />
+                    <Icon name="fire" size={scale(23)} color="white" />
                   </View>
                   <View
                     style={{ flexDirection: "column", justifyContent: "space-evenly" }}
                   >
                     <Text
-                      style={{ color: "#5b60ac", fontSize: 14, fontWeight: "bold" }}
+                      style={{ color: "#5b60ac", fontSize: scale(11), fontWeight: "bold" }}
                     >
                       Temperature
                     </Text>
-                    <Text style={{ color: "#fff", fontSize: 30, fontWeight: "bold" }}>
+                    <Text style={{ color: "#fff", fontSize: scale(25), fontWeight: "bold" }}>
                       {Temperature}'C
                     </Text>
                   </View>
@@ -239,25 +284,25 @@ useEffect(() => {
                 <View style={styles.stats}>
                   <View
                     style={{
-                      width: "35%",
-                      height: "55%",
+                      width: scale(50),
+                      height: scale(50),
                       borderRadius: 100,
                       backgroundColor: "#9ca2ff",
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <IconX name="waves" size={30} color="white" />
+                    <IconX name="waves" size={scale(23)} color="white" />
                   </View>
                   <View
                     style={{ flexDirection: "column", justifyContent: "space-evenly" }}
                   >
                     <Text
-                      style={{ color: "#5b60ac", fontSize: 14, fontWeight: "bold" }}
+                      style={{ color: "#5b60ac", fontSize: scale(11), fontWeight: "bold" }}
                     >
                       Humidity
                     </Text>
-                    <Text style={{ color: "#fff", fontSize: 30, fontWeight: "bold" }}>
+                    <Text style={{ color: "#fff", fontSize: scale(25), fontWeight: "bold" }}>
                       {Humidity}%
                     </Text>
                   </View>
@@ -267,7 +312,7 @@ useEffect(() => {
                 <View
                   style={{
                     width: "100%",
-                    height: "45%",
+                    height: "65%",
                     flexDirection: "row",
                     justifyContent: "space-between",
                   }}
@@ -300,22 +345,22 @@ useEffect(() => {
                       >
                         <View
                           style={{
-                            width: 60,
-                            height: 60,
+                            width: verticalScale(60),
+                            height: verticalScale(60),
                             backgroundColor: "#ffdec2",
                             borderRadius: 100,
                             justifyContent: "center",
                             alignItems: "center",
                           }}
                         >
-                          <Icon name="window-restore" size={30} color="#f5ab2f" />
+                          <Icon name="window-restore" size={verticalScale(24)} color="#f5ab2f" />
                         </View>
                         <View style={{ flexDirection: "column" }}>
-                          <Text style={{ fontSize: 22, fontWeight: "bold" }}>
+                          <Text style={{ fontSize: scale(18), fontWeight: "bold" }}>
                             Window
                           </Text>
                           <Text
-                            style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}
+                            style={{ fontSize: scale(9), fontWeight: "bold", color: "gray" }}
                           >
                             {windowAuto ? "Automatic" : "Manual"} Mode
                           </Text>
@@ -327,7 +372,7 @@ useEffect(() => {
                           trackColor={{ false: "#b5b5b5", true: "#848cf7" }}
                           thumbColor={"#fff"}
                           ios_backgroundColor="#3e3e3e"
-                          onValueChange={(value) => setWindowAuto(value)}
+                          onValueChange={writeAutoWind}
                           value={windowAuto}
                         />
                       </View>
@@ -335,7 +380,7 @@ useEffect(() => {
                     <View
                       style={{
                         width: "100%",
-                        height: "25%",
+                        height: "24%",
                         backgroundColor: windowbg,
                         marginTop: "auto",
                         borderBottomStartRadius: 20,
@@ -344,11 +389,11 @@ useEffect(() => {
                         alignItems: "center",
                       }}
                     >
-                      <TouchableOpacity onPress={() => setWindowMGR(!windowMGR)}>
+                      <TouchableOpacity onPress={writeOpenWindow}>
                         <Text
-                          style={{ fontWeight: "bold", fontSize: 16, color: "#fff" }}
+                          style={{ fontWeight: "bold", fontSize: scale(14), color: "#fff" }}
                         >
-                          Window is {windowMGR ? "Open" : "Closed"}
+                          Click to is {windowMGR ? "Close" : "Open"}
                         </Text>
                       </TouchableOpacity>
                     </View>
@@ -382,22 +427,22 @@ useEffect(() => {
                       >
                         <View
                           style={{
-                            width: 60,
-                            height: 60,
+                            width: verticalScale(60),
+                            height: verticalScale(60),
                             backgroundColor: "#ffd4d4",
                             borderRadius: 100,
                             justifyContent: "center",
                             alignItems: "center",
                           }}
                         >
-                          <Icon name="fire-alt" size={30} color="#fa6c6c" />
+                          <Icon name="fire-alt" size={verticalScale(25)} color="#fa6c6c" />
                         </View>
                         <View style={{ flexDirection: "column" }}>
-                          <Text style={{ fontSize: 22, fontWeight: "bold" }}>
+                          <Text style={{ fontSize: scale(18), fontWeight: "bold" }}>
                             Temperature
                           </Text>
                           <Text
-                            style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}
+                            style={{ fontSize: scale(8), fontWeight: "bold", color: "gray" }}
                           >
                             Notification
                           </Text>
@@ -418,7 +463,7 @@ useEffect(() => {
                     >
                       <TouchableOpacity onPress={() => setTempNotif(!tempNotif)}>
                         <Text
-                          style={{ fontWeight: "bold", fontSize: 16, color: "#fff" }}
+                          style={{ fontWeight: "bold", fontSize: scale(14), color: "#fff" }}
                         >
                           Notification {tempNotif ? "ON" : "OFF"}
                         </Text>
@@ -430,7 +475,7 @@ useEffect(() => {
                       <View
                   style={{
                     width: "100%",
-                    height: "55%",
+                    height: "65%",
                     backgroundColor: "#fff",
                     borderRadius: 20,
                     flexDirection: "column",
@@ -458,21 +503,21 @@ useEffect(() => {
                       >
                         <View
                           style={{
-                            width: 70,
-                            height: 70,
+                            width: scale(70),
+                            height: scale(70),
                             backgroundColor: "#eafae8",
                             borderRadius: 100,
                             justifyContent: "center",
                             alignItems: "center",
                           }}
                         >
-                          <Icon name="database" size={30} color="#6dfe66" />
+                          <Icon name="database" size={scale(27)} color="#6dfe66" />
                         </View>
-                        <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                        <Text style={{ fontSize: scale(20), fontWeight: "bold" }}>
                           Coffe Stock{" "}
                         </Text>
                         <Text
-                          style={{ fontSize: 14, fontWeight: "bold", color: "gray" }}
+                          style={{ fontSize: scale(10), fontWeight: "bold", color: "gray" }}
                         >
                           {" "}
                           Notification{" "}
@@ -525,7 +570,7 @@ useEffect(() => {
                     }}
                   >
                     <TouchableOpacity onPress={() => setStocknotif(!stocknotif)}>
-                      <Text style={{ fontWeight: "bold", fontSize: 16, color: "#fff" }}>
+                      <Text style={{ fontWeight: "bold", fontSize: scale(14), color: "#fff" }}>
                         Notification {stocknotif ? "ON" : "OFF"}
                       </Text>
                     </TouchableOpacity>
@@ -616,7 +661,7 @@ useEffect(() => {
 
 
         {stockpage ?
-        <View style= {{ width : '96%', height : '60%' , backgroundColor : 'white', borderRadius : 20 , flexDirection : 'column', paddingVertical : 30, gap : 20 }}>
+        <View style= {{ width : '96%', height : '75%' , backgroundColor : 'white', borderRadius : 20 , flexDirection : 'column', paddingVertical : 30, gap : 20 }}>
         <View style= {{ width : '100%', height : 90 , justifyContent : 'center', alignItems : 'center', flexDirection : 'column', gap : 10 }}>
                   <View style= {{ flexDirection : 'row' , alignItems : 'center' , gap : 10 }}> 
                         <Icon name="coffee" size={20} color="black" />
@@ -720,7 +765,7 @@ const styles = StyleSheet.create({
     height : '100%',
     backgroundColor : '#ededed',
     flex : 1,
-    justifyContent : 'center',
+    marginTop : 100,
     alignItems : 'center',
     gap : 15,
   },

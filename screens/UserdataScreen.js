@@ -87,18 +87,18 @@ const goBackHome = () => {
 
             
 
-<Text style={{fontSize : 30 , fontWeight : 'bold' , marginTop : 20}}>Users List</Text>
+<Text style={{fontSize : 30 , fontWeight : 'bold' , marginTop : 20}}> <Icon name="users-cog" size={30} color="black" />  Users List</Text>
 
-            <View style={{ height : '60%' , width : '100%' }}>
-                <ScrollView style={{paddingHorizontal : 5 , paddingVertical : 20,}}>
+            <View style={{ height : '60%' , width : '95%' }}>
+                <ScrollView style={{paddingHorizontal : 10 , paddingVertical : 20, backgroundColor : 'white' , borderRadius : 20}}>
                           {Users.map((user) => (
-                             <View key={user.username} style = {{backgroundColor : 'white',  width : '100%' , height : 100, borderWidth : 2 , borderRadius : 10, padding : 5, flexDirection : 'row', marginBottom : 15 }}>
+                             <View key={user.username} style = {{backgroundColor : 'white',  width : '100%' , height : 100,borderWidth : 2, borderRadius : 10, padding : 5, flexDirection : 'row', marginBottom : 15, alignItems : 'center', }}>
                              <View style={{ flexDirection : 'column', width : '65%', height : '100%', padding : 5 }}>
                                      <Text style={{ fontSize : 23, fontWeight : 'bold'}}>{user.username}</Text>
                                      <Text style={{ fontSize : 15}}><Text style={{ fontWeight : 'bold' }}>Email</Text> : {user.email}</Text>
                                      <Text style={{ fontSize : 15}}><Text style={{ fontWeight : 'bold' }}>Privilege</Text> : {user.role}</Text>
                              </View>
-                             <TouchableOpacity onPress={() => getbyUsername(user.username)} style={{ width : '33%' , height : '100%', marginLeft : 'auto', borderRadius : 10 , justifyContent : 'center', alignItems  : 'center' , borderWidth : 2,  }}>
+                             <TouchableOpacity onPress={() => getbyUsername(user.username)} style={{ width : '30%' , height : '80%', marginLeft : 'auto', borderRadius : 10 , justifyContent : 'center', alignItems  : 'center' , borderWidth : 2,  }}>
                              <Text style={{ fontSize : 17, fontWeight : 'bold', color : 'red'}}>Remove</Text>
                              </TouchableOpacity>
                          </View>
