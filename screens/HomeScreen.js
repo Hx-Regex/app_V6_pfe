@@ -200,12 +200,12 @@ useEffect(() => {
 
 
    
-    const stocknotifbg = stocknotif ? '#848cf9' : '#b5b5b5'
-    const windowbg = windowMGR ? '#848cf9' : '#b5b5b5'
-    const temponotifbg = tempNotif ? '#848cf9' : '#b5b5b5'
-    const homebg = !infopage && !stockpage  ? '#848cf9' : '#b5b5b5'
-    const infobg = infopage && !stockpage ? '#848cf9' : '#b5b5b5'
-   
+    const stocknotifbg = stocknotif ? '#2b79d5' : '#b5b5b5'
+    const windowbg = windowMGR ? '#2b79d5' : '#b5b5b5'
+    const temponotifbg = tempNotif ? '#2b79d5' : '#b5b5b5'
+    const homebg = !infopage && !stockpage  ? '#2b79d5' : '#b5b5b5'
+    const infobg = infopage && !stockpage ? '#2b79d5' : '#b5b5b5'
+    const  windowbtn = windowAuto ? '#b5b5b5' : '#2b79d5'
 
 
    
@@ -255,328 +255,104 @@ useEffect(() => {
           !infopage && !stockpage ? (
             <>
               <View style={styles.statscontainer}>
-                <View style={styles.stats}>
-                  <View
-                    style={{
-                      width: scale(50),
-                      height: scale(50),
-                      borderRadius: 100,
-                      backgroundColor: "#9ca2ff",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Icon name="fire" size={scale(23)} color="white" />
-                  </View>
-                  <View
-                    style={{ flexDirection: "column", justifyContent: "space-evenly" }}
-                  >
-                    <Text
-                      style={{ color: "#5b60ac", fontSize: scale(11), fontWeight: "bold" }}
-                    >
-                      Temperature
-                    </Text>
-                    <Text style={{ color: "#fff", fontSize: scale(25), fontWeight: "bold" }}>
-                      {Temperature}'C
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.stats}>
-                  <View
-                    style={{
-                      width: scale(50),
-                      height: scale(50),
-                      borderRadius: 100,
-                      backgroundColor: "#9ca2ff",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <IconX name="waves" size={scale(23)} color="white" />
-                  </View>
-                  <View
-                    style={{ flexDirection: "column", justifyContent: "space-evenly" }}
-                  >
-                    <Text
-                      style={{ color: "#5b60ac", fontSize: scale(11), fontWeight: "bold" }}
-                    >
-                      Humidity
-                    </Text>
-                    <Text style={{ color: "#fff", fontSize: scale(25), fontWeight: "bold" }}>
-                      {Humidity}%
-                    </Text>
-                  </View>
-                </View>
+                <View style={{  width : '45%', height : '100%' , backgroundColor : 'white', flexDirection : 'column', justifyContent : 'space-evenly', alignItems  : 'center' , borderRadius : 15, borderWidth : 3, borderColor : "#2b79d5" }}>
+                    <View style= {{ width : scale(65) , height : scale(65), borderRadius : 100, backgroundColor : '#f4f4f4', justifyContent : 'center', alignItems : 'center' }}>
+                          <Icon name="temperature-high" size={scale(30)} color="#2b79d5" />
+                    </View>
+                    <Text style={{ fontSize : scale(16), fontWeight : 'bold' }}>Temperature</Text>
+                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#a6a6a6'}}>{Temperature}°C</Text>
+               
+               
+               </View>
+
+               <View style={{  width : '45%', height : '100%' , backgroundColor : 'white', flexDirection : 'column', justifyContent : 'space-evenly', alignItems  : 'center' , borderRadius : 15, borderWidth : 3, borderColor : "#2b79d5"   }}>
+                    <View style= {{ width : scale(65) , height : scale(65), borderRadius : 100, backgroundColor : '#f4f4f4', justifyContent : 'center', alignItems : 'center' }}>
+                          <IconX name="water" size={scale(40)} color="#2b79d5" />
+                    </View>
+                    <Text style={{ fontSize : scale(16), fontWeight : 'bold' }}>Humidity</Text>
+                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#a6a6a6'}}>{Humidity}%</Text>
+               
+               
+               </View>
               </View>
               <View style={styles.cubecontainer}>
                 <View
                   style={{
                     width: "100%",
-                    height: "65%",
+                    height: "43%",
                     flexDirection: "row",
                     justifyContent: "space-between",
+                    borderRadius : 15,
+
                   }}
                 >
-                  <View
-                    style={{
-                      width: "48%",
-                      height: "100%",
-                      backgroundColor: "#fff",
-                      borderRadius: 20,
-                      flexDirection: "column",
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "78%",
-                        borderRadius: 20,
-                        flexDirection: "row",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: "100%",
-                          width: "60%",
-                          padding: 8,
-                          flexDirection: "column",
-                          gap: 6,
-                        }}
-                      >
-                        <View
-                          style={{
-                            width: verticalScale(60),
-                            height: verticalScale(60),
-                            backgroundColor: "#ffdec2",
-                            borderRadius: 100,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Icon name="window-restore" size={verticalScale(24)} color="#f5ab2f" />
-                        </View>
-                        <View style={{ flexDirection: "column" }}>
-                          <Text style={{ fontSize: scale(18), fontWeight: "bold" }}>
-                            Window
-                          </Text>
-                          <Text
-                            style={{ fontSize: scale(9), fontWeight: "bold", color: "gray" }}
-                          >
-                            {windowAuto ? "Automatic" : "Manual"} Mode
-                          </Text>
-                        </View>
-                      </View>
+                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : 'white' , borderRadius : 15 , padding : 0, borderBottomStartRadius : 16 , borderBottomEndRadius : 0, borderTopEndRadius : 0, borderTopStartRadius : 15  }}>
+                          <View style= {{ width : '45%' , height : '100%', alignItems : 'center', justifyContent : 'space-evenly' }}>
+                                <View style={{ width : scale(75), height : scale(75), backgroundColor : '#f4f4f4', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
+                                     <IconX name="window-closed-variant" size={verticalScale(40)} color="#2b79d5" />
+                                     
+                                </View>
+                                <Switch
+                                  trackColor={{ false: "#b5b5b5", true: "#2b79d5" }}
+                                  thumbColor={"#fff"}
+                                  ios_backgroundColor="#3e3e3e"
+                                  onValueChange={writeAutoWind}
+                                  value={windowAuto}
+                                  style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
+                                />
 
-                      <View style={{ height: "100%", width: "40%", padding: 8 }}>
-                        <Switch
-                          trackColor={{ false: "#b5b5b5", true: "#848cf7" }}
-                          thumbColor={"#fff"}
-                          ios_backgroundColor="#3e3e3e"
-                          onValueChange={writeAutoWind}
-                          value={windowAuto}
-                        />
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "24%",
-                        backgroundColor: windowbg,
-                        marginTop: "auto",
-                        borderBottomStartRadius: 20,
-                        borderBottomEndRadius: 20,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <TouchableOpacity onPress={writeOpenWindow}>
-                        <Text
-                          style={{ fontWeight: "bold", fontSize: scale(14), color: "#fff" }}
-                        >
-                          Click to is {windowMGR ? "Close" : "Open"}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
+                          </View>
 
-                  <View
-                    style={{
-                      width: "48%",
-                      height: "100%",
-                      backgroundColor: "#fff",
-                      borderRadius: 20,
-                      flexDirection: "column",
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "78%",
-                        borderRadius: 20,
-                        flexDirection: "row",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          padding: 8,
-                          flexDirection: "column",
-                          gap: 6,
-                        }}
-                      >
-                        <View
-                          style={{
-                            width: verticalScale(60),
-                            height: verticalScale(60),
-                            backgroundColor: "#ffd4d4",
-                            borderRadius: 100,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Icon name="fire-alt" size={verticalScale(25)} color="#fa6c6c" />
-                        </View>
-                        <View style={{ flexDirection: "column" }}>
-                          <Text style={{ fontSize: scale(18), fontWeight: "bold" }}>
-                            Temperature
-                          </Text>
-                          <Text
-                            style={{ fontSize: scale(8), fontWeight: "bold", color: "gray" }}
-                          >
-                            Notification
-                          </Text>
-                        </View>
-                      </View>
+                          <View style= {{ width : '55%' , height : '100%', textAlign : 'center', paddingVertical : 15 }}>
+                                <View>
+                                   <Text style= {{ fontSize : scale(25) , fontWeight : 'bold' }}>Windows</Text>
+                                   <Text style= {{ fontSize : scale(17) , fontWeight : 'bold' }}>Manager</Text>
+                                </View>
+                                  
+                                  <Text
+                                     style={{ fontSize: scale(13), fontWeight: "bold", color: "gray" }}
+                                   >
+                                  {windowAuto ? "Automatic" : "Manual"} Mode
+                                  </Text>
+                          </View>
                     </View>
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "25%",
-                        backgroundColor: temponotifbg,
-                        marginTop: "auto",
-                        borderBottomStartRadius: 20,
-                        borderBottomEndRadius: 20,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <TouchableOpacity onPress={() => setTempNotif(!tempNotif)}>
-                        <Text
-                          style={{ fontWeight: "bold", fontSize: scale(14), color: "#fff" }}
-                        >
-                          Notification {tempNotif ? "ON" : "OFF"}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-                      <TouchableOpacity onPress={() => setStockpage(true)} style={{ width : '100%' , height : '100%' }}>
-                      <View
-                  style={{
-                    width: "100%",
-                    height: "65%",
-                    backgroundColor: "#fff",
-                    borderRadius: 20,
-                    flexDirection: "column",
-                  }}
-                >
-                  <View style={{ width: "100%", height: "80%", flexDirection: "row" }}>
-                    <View
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: 20,
-                        flexDirection: "column",
-                        alignItems: "center",
-                      }}
-                    >
-                      <View
-                        style={{
-                          width: "100%",
-                          height: "80%",
-                          borderRadius: 20,
-                          padding: 10,
-                          flexDirection: "column",
-                          alignItems: "center",
-                        }}
-                      >
-                        <View
-                          style={{
-                            width: scale(70),
-                            height: scale(70),
-                            backgroundColor: "#eafae8",
-                            borderRadius: 100,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Icon name="database" size={scale(27)} color="#6dfe66" />
-                        </View>
-                        <Text style={{ fontSize: scale(20), fontWeight: "bold" }}>
-                          Coffe Stock{" "}
-                        </Text>
-                        <Text
-                          style={{ fontSize: scale(10), fontWeight: "bold", color: "gray" }}
-                        >
-                          {" "}
-                          Notification{" "}
-                        </Text>
-                      </View>
-                    </View>
-                    {/* <View
-                      style={{
-                        width: "50%",
-                        height: "100%",
-                        borderBottomRightRadius: 20,
-                        padding: 10,
-                        borderTopRightRadius: 20,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <View
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          borderColor: "#6dfe66",
-                          borderWidth: 3,
-                          borderRadius: 20,
-                        }}
-                      >
-                        <Text style={{ fontSize: 60, color: "#6dfe66" }}>{Stock}</Text>
-                        <Text
-                          style={{ fontSize: 20, fontWeight: "bold", color: "#6dfe66" }}
-                        >
-                          Capsules
-                        </Text>
-                      </View>
-                    </View> */}
-                  </View>
 
-                  <View
-                    style={{
-                      width: "100%",
-                      height: "20%",
-                      backgroundColor: stocknotifbg,
-                      marginTop: "auto",
-                      borderBottomStartRadius: 20,
-                      borderBottomEndRadius: 20,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TouchableOpacity onPress={() => setStocknotif(!stocknotif)}>
-                      <Text style={{ fontWeight: "bold", fontSize: scale(14), color: "#fff" }}>
-                        Notification {stocknotif ? "ON" : "OFF"}
-                      </Text>
+
+                    <TouchableOpacity onPress={writeOpenWindow} style= {{ width : '28%' , height : '100%', justifyContent : 'center', alignItems : 'center' , backgroundColor  :windowbtn   , borderBottomStartRadius : 0 , borderBottomEndRadius : 15, borderTopEndRadius : 15, borderTopStartRadius : 0 }}>
+                              <Text style={{ fontSize : scale(22), fontWeight : 'bold', color : 'white' }}>{windowMGR ? "Close" : "Open"}</Text>
                     </TouchableOpacity>
-                  </View>
+                    
+
+                
                 </View>
-                      </TouchableOpacity>
+
+                        <TouchableOpacity
+                          onPress={() => setStockpage(true)}
+                          style={{
+                            width: "100%",
+                            height: "43%",
+                            backgroundColor: "#fff",
+                            borderRadius: 15,
+                            flexDirection: "row",
+                          }}
+                        >
+                            <View style= {{ width : '35%' , height : '100%', padding : 8, flexDirection : 'column', alignItems : 'center' , justifyContent : 'center' }}>
+                                  <View style={{ width : scale(75), height : scale(75), backgroundColor : '#f4f4f4', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
+                                        <IconX name="food" size={verticalScale(40)} color="#2b79d5" />
+                                  </View>
+                            </View>
+                            <View style= {{ paddingVertical : 8, justifyContent : 'center' }}>
+                              <Text style= {{ fontSize : scale(25), fontWeight : 'bold' }}>Inventory</Text>
+                              <Text style= {{ fontSize : scale(20), fontWeight : 'bold' }}>System</Text>
+                            </View>
+                            <View style= {{ justifyContent : 'center', alignitems : 'center' , width : '30%' }}>
+                               <View style={{ justifyContent : 'center', alignItems : 'center', marginLeft : 'auto' , marginRight : 15 }}>
+                                   <Icon name="external-link-alt" size={verticalScale(25)} color="#2b79d5" />
+                               </View>
+                            </View>
+                          
+                        </TouchableOpacity>
+
                 
               </View>
             </>
@@ -589,89 +365,122 @@ useEffect(() => {
        
        
                 {
-                  infopage && !stockpage ?     <View
-                  style={{
-                    width: "100%",
-                    height: "75%",
-                    padding: 30,
-                    flexDirection: "column",
-                    gap: 5,
-                  }}
-                >
-                  <View>
-                    <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-                      Welcome {userData?.username}
-                    </Text>
-                    <Text style={{ fontSize: 16, flexDirection: "row", marginBottom: 20 }}>
-                      You're a{" "}
-                      <Text style={{ fontWeight: "bold", color: "#848afa" }}>
-                        {userData?.role}
-                      </Text>
-                    </Text>
-                  </View>
+                  infopage && !stockpage ?     
+                //   <View
+                //   style={{
+                //     width: "100%",
+                //     height: "75%",
+                //     padding: 30,
+                //     flexDirection: "column",
+                //     gap: 5,
+                //   }}
+                // >
+                //   <View>
+                //     <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+                //       Welcome {userData?.username}
+                //     </Text>
+                //     <Text style={{ fontSize: 16, flexDirection: "row", marginBottom: 20 }}>
+                //       You're a{" "}
+                //       <Text style={{ fontWeight: "bold", color: "#2b79d5" }}>
+                //         {userData?.role}
+                //       </Text>
+                //     </Text>
+                //   </View>
 
-                  <TouchableOpacity onPress={handlereset}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        width: "100%",
-                        height: 60,
-                        gap: 20,
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="user-lock" size={27} color="black" />
-                      <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                        Reset Password
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                      { userData?.role == 'Admin' ?   
-                      <TouchableOpacity onPress={handleDeleteUser}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        width: "100%",
-                        height: 60,
-                        gap: 20,
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="users-cog" size={27} color="black" />
-                      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Check Users</Text>
-                    </View>
-                  </TouchableOpacity> : ''}
+                //   <TouchableOpacity onPress={handlereset}>
+                //     <View
+                //       style={{
+                //         flexDirection: "row",
+                //         width: "100%",
+                //         height: 60,
+                //         gap: 20,
+                //         alignItems: "center",
+                //       }}
+                //     >
+                //       <Icon name="user-lock" size={27} color="black" />
+                //       <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                //         Reset Password
+                //       </Text>
+                //     </View>
+                //   </TouchableOpacity>
+                //       { userData?.role == 'Admin' ?   
+                //       <TouchableOpacity onPress={handleDeleteUser}>
+                //     <View
+                //       style={{
+                //         flexDirection: "row",
+                //         width: "100%",
+                //         height: 60,
+                //         gap: 20,
+                //         alignItems: "center",
+                //       }}
+                //     >
+                //       <Icon name="users-cog" size={27} color="black" />
+                //       <Text style={{ fontSize: 18, fontWeight: "bold" }}>Check Users</Text>
+                //     </View>
+                //   </TouchableOpacity> : ''}
                 
 
-                  <TouchableOpacity onPress={handleSignOut} style={{ marginTop: "auto" }}>
-                    <View
-                      style={{
-                        width: "100%",
-                        height: 60,
-                        flexDirection: "row",
-                        gap: 20,
-                        alignItems: "center",
-                      }}
-                    >
-                      <Icon name="sign-out-alt" size={27} color="black" />
-                      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Log Out</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View> :  '' }
+                //   <TouchableOpacity onPress={handleSignOut} style={{ marginTop: "auto" }}>
+                //     <View
+                //       style={{
+                //         width: "100%",
+                //         height: 60,
+                //         flexDirection: "row",
+                //         gap: 20,
+                //         alignItems: "center",
+                //       }}
+                //     >
+                //       <Icon name="sign-out-alt" size={27} color="black" />
+                //       <Text style={{ fontSize: 18, fontWeight: "bold" }}>Log Out</Text>
+                //     </View>
+                //   </TouchableOpacity>
+                // </View> 
+                <>
+                  <View style={{ width : '90%', height : '20%' , backgroundColor : 'white', borderRadius : 15, flexDirection : 'row', alignItems : 'center' }}>
+                        <View style={{ width : '37%', height : '100%', justifyContent : 'center', alignItems : 'center', borderRadius : 15 }}>
+                              <View style={{ width : scale(70), height : scale(70), backgroundColor  : '#f4f4f4', borderRadius : 100,justifyContent : 'center', alignItems : 'center' }}> 
+                                  <Icon name="user-alt" size={scale(30)} color="#2b78d5" />
+                              </View>
+
+                        </View>
+                        <View style= {{ width : '63%', height : '100%', justifyContent : 'center', overflow : 'hidden' }}>
+                             <Text style={{ fontSize  : scale(18),  }}>Username : <Text style={{ fontWeight  : 'bold' }}>{userData?.username}</Text></Text>
+                             <Text style={{ fontSize  : scale(15),  }}>Role : <Text style={{ fontWeight  : 'bold', color  : `${userData?.role == 'Admin' ? 'red': '#2b78d5'}` }}>{userData?.role}</Text></Text>
+                             <Text style={{ fontSize  : scale(13),  }}>Email : <Text style={{ fontWeight  : 'bold' }}>{userData?.email}</Text></Text>
+                        </View>
+                  </View>
+
+                  <View style={{ width : '90%', height : '40%', backgroundColor : 'white', borderRadius : 15 }}>
+                    <TouchableOpacity onPress={handlereset} style={{ width : '100%', height  : '20%', padding : 19,borderColor : 'gray', borderBottomWidth : 1, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                                <Icon name="user-lock" size={27} color="black" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15) }}>Reset Password</Text>
+                    </TouchableOpacity>
+                    { userData?.role == 'Admin' ?  <TouchableOpacity onPress={handleDeleteUser} style={{ width : '100%', height  : '20%',borderColor : 'gray', padding : 19, borderBottomWidth : 1, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                                <Icon name="users" size={27} color="black" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15) }}>Users List</Text>
+                    </TouchableOpacity> : ''}
+                    <TouchableOpacity onPress={handleSignOut} style={{ width : '100%', height  : '20%', marginTop  : 'auto',padding : 19, borderTopWidth : 1,borderColor : 'gray', alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                                <Icon name="sign-out-alt" size={27} color="black" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15) }}>Log Out</Text>
+                    </TouchableOpacity>
+
+                  </View>
+                </>
+                :  '' }
 
 
         {stockpage ?
-        <View style= {{ width : '96%', height : '75%' , backgroundColor : 'white', borderRadius : 20 , flexDirection : 'column', paddingVertical : 30, gap : 20 }}>
+        <View style= {{ width : '96%', height : 'auto' , backgroundColor : 'white', borderWidth : 3, borderColor : '#2b79d5', borderRadius : 20 , flexDirection : 'column', paddingVertical : 30, gap : 20 }}>
         <View style= {{ width : '100%', height : 90 , justifyContent : 'center', alignItems : 'center', flexDirection : 'column', gap : 10 }}>
                   <View style= {{ flexDirection : 'row' , alignItems : 'center' , gap : 10 }}> 
                         <Icon name="coffee" size={20} color="black" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold'}}>Coffee Capsules</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
-                        <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>79 / 100</Text>   
+                        <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>{Stock} / 100</Text>   
                     </View>
-                    <View style={{  width : '79%', height  : '100%', borderRadius : 30 , backgroundColor : '#8087fa'}}>         
+                    <View style={{  width : `${Stock}%`, height  : '100%', borderRadius : 30 , backgroundColor : '#2b79d5'}}>         
                     </View>
                   </View>
         </View>
@@ -681,11 +490,11 @@ useEffect(() => {
                         <Icon name="candy-cane" size={20} color="black" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold'}}>Sugar Packets</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
                         <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>20 / 40</Text>   
                     </View>
-                    <View style={{  width : '50%', height  : '100%', borderRadius : 30,backgroundColor : '#8087fa'}}>         
+                    <View style={{  width : '50%', height  : '100%', borderRadius : 30,backgroundColor : '#2b79d5'}}>         
                     </View>
                   </View>
         </View>
@@ -695,11 +504,11 @@ useEffect(() => {
                         <IconX name="tea" size={25} color="black" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold'}}>Tea Packets</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
                         <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>30 / 55</Text>   
                     </View>
-                    <View style={{  width : '66%', height  : '100%', borderRadius : 30 , backgroundColor : '#8087fa'}}>         
+                    <View style={{  width : '66%', height  : '100%', borderRadius : 30 , backgroundColor : '#2b79d5'}}>         
                     </View>
                   </View>
         </View>
@@ -709,11 +518,11 @@ useEffect(() => {
                         <Icon name="coffee" size={20} color="black" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold'}}>Coffee Capsules</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#bababa', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
                         <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>79 / 100</Text>   
                     </View>
-                    <View style={{  width : '79%', height  : '100%', borderRadius : 30 , backgroundColor : '#8087fa'}}>         
+                    <View style={{  width : '79%', height  : '100%', borderRadius : 30 , backgroundColor : '#2b79d5'}}>         
                     </View>
                   </View>
         </View>
@@ -725,11 +534,11 @@ useEffect(() => {
 
 
         <View style={styles.navBar}>
-             { userData?.role == 'Admin' ? <View style={{ position: 'absolute', width : 120, height : 120 , backgroundColor : '#ededed', borderRadius : 100 , bottom : '25%', left : '35%', justifyContent : 'center', alignItems : 'center' }}>
+             { userData?.role == 'Admin' ? <View style={{ position: 'absolute', width : 120, height : 120 , backgroundColor : '#f2f2f2', borderRadius : 100 , bottom : '22%', left : '36%', justifyContent : 'center', alignItems : 'center' }}>
                       <TouchableOpacity onPress={handleAddUser}>
-                          <View style={{ width : 100 , height : 100 , backgroundColor : '#848cf9' , borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
+                          <TouchableOpacity onPress={handleAddUser} style={{ width : 100 , height : 100 , backgroundColor : '#2b79d5' , borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
                               <Icon name="plus"  size={35} color="white"/>      
-                          </View>
+                          </TouchableOpacity>
                       </TouchableOpacity>
                       
                   </View> : '' }
@@ -737,11 +546,11 @@ useEffect(() => {
                 <View style={{ width : '100%', height :'100%' , justifyContent : 'space-between' , alignItems : 'center', flexDirection : 'row' }}>
 
                       <View style={{ width : '35%', height : '100%' , justifyContent : 'center', alignItems : 'center' }}>
-                              <TouchableOpacity onPress={() => {setInfopage(false); setStockpage(false)}}><Icon name="home"  size={30} color={homebg} /></TouchableOpacity>
+                              <TouchableOpacity onPress={() => {setInfopage(false); setStockpage(false)}}><Icon name="home"  size={35} color={homebg} /></TouchableOpacity>
                       </View>
 
                       <View style={{ width : '35%', height : '100%', justifyContent : 'center', alignItems : 'center'  }}>
-                          <TouchableOpacity onPress={() => {setInfopage(!infopage); setStockpage(false)}} ><Icon name="user-alt"  size={30} color={infobg}/></TouchableOpacity>
+                          <TouchableOpacity onPress={() => {setInfopage(!infopage); setStockpage(false)}} ><Icon name="user-alt"  size={35} color={infobg}/></TouchableOpacity>
                       </View>
 
                      
@@ -763,18 +572,20 @@ const styles = StyleSheet.create({
   container : {
     width : '100%',
     height : '100%',
-    backgroundColor : '#ededed',
+    backgroundColor : '#f2f2f2',
     flex : 1,
-    marginTop : 100,
+    marginTop : 0,
     alignItems : 'center',
+    justifyContent : 'center',
     gap : 15,
   },
   statscontainer : {
     width : '90%',
-    height : '15%',
-    backgroundColor : '#848cf9',
+    height : '25%',
     borderRadius : 20,
     flexDirection : 'row',
+    padding : 8,
+    justifyContent : 'space-between'
 
   },
   cubecontainer : {

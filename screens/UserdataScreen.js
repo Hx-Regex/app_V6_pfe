@@ -107,7 +107,7 @@ const goBackHome = () => {
                 </ScrollView>
             </View>
             <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={goBackHome}>
-                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20}}>Home</Text></Text>
+                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : "#2b79d5"}}>Home</Text></Text>
             </TouchableOpacity>
             
 

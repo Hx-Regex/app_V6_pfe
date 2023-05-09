@@ -25,7 +25,7 @@ const RegisterScreen = () => {
 
     const data = [
         { label: 'Adminstrator', value: 'Admin' },
-        { label: 'Normal User', value: 'Normal' },
+        { label: 'Normal User', value: 'Normal User' },
       ];
 
 
@@ -195,7 +195,7 @@ const handleSignUp = async () => {
         
       </View>
             <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={backtologin}>
-                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20}}>Home</Text></Text>
+                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : '#2b79d5'}}>Home</Text></Text>
             </TouchableOpacity>
         
         
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#848cf9',
+        backgroundColor : '#2b79d5',
         height : 60,
         width : '100%',
         padding : 10,
