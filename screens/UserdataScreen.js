@@ -1,4 +1,4 @@
-import { StyleSheet, Switch, Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import { StyleSheet, Switch, Text, TouchableOpacity, View, ScrollView, Alert } from 'react-native'
 import React, { useState} from 'react'
 import { ref , set , get , update, remove , child , onValue} from 'firebase/database'
 import { auth, db, firestoreDB } from '../firebase'
@@ -9,15 +9,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconX from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect } from 'react'
 import { doc, setDoc, getDocs,getDoc , collection, query, where, deleteDoc } from "firebase/firestore";
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 const Userdatascreen =   () => {
-    
-   
-
-
-
- 
-      
 
   const navigation = useNavigation()
 
@@ -58,6 +52,23 @@ const Userdatascreen =   () => {
        deleteUser(user.id)
     })  
   }
+  const AlertDelete = (username) => {
+    Alert.alert(
+      'Delete User',
+      'Are you sure you want to delete this user?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel'
+        },
+        {
+          text: 'Delete',
+          onPress: () => getbyUsername(username)
+        }
+      ],
+      { cancelable: false }
+    );
+  };
   
 
 
@@ -87,22 +98,49 @@ const goBackHome = () => {
 
             
 
-<Text style={{fontSize : 30 , fontWeight : 'bold' , marginTop : 20}}> <Icon name="users-cog" size={30} color="black" />  Users List</Text>
+<Text style={{fontSize : 30 , fontWeight : 'bold' , marginTop : 0}}> <Icon name="users-cog" size={30} color="black" />  Users List</Text>
 
-            <View style={{ height : '60%' , width : '95%' }}>
-                <ScrollView style={{paddingHorizontal : 10 , paddingVertical : 20, backgroundColor : 'white' , borderRadius : 20}}>
+            <View style={{ height : '67%' , width : '97%' }}>
+                <ScrollView style={{paddingHorizontal : 10 , paddingVertical : 20, backgroundColor : 'white' , borderRadius : 10}}>
                           {Users.map((user) => (
-                             <View key={user.username} style = {{backgroundColor : 'white',  width : '100%' , height : 100,borderWidth : 2, borderRadius : 10, padding : 5, flexDirection : 'row', marginBottom : 15, alignItems : 'center', }}>
-                             <View style={{ flexDirection : 'column', width : '65%', height : '100%', padding : 5 }}>
-                                     <Text style={{ fontSize : 23, fontWeight : 'bold'}}>{user.username}</Text>
-                                     <Text style={{ fontSize : 15}}><Text style={{ fontWeight : 'bold' }}>Email</Text> : {user.email}</Text>
-                                     <Text style={{ fontSize : 15}}><Text style={{ fontWeight : 'bold' }}>Privilege</Text> : {user.role}</Text>
-                             </View>
-                             <TouchableOpacity onPress={() => getbyUsername(user.username)} style={{ width : '30%' , height : '80%', marginLeft : 'auto', borderRadius : 10 , justifyContent : 'center', alignItems  : 'center' , borderWidth : 2,  }}>
-                             <Text style={{ fontSize : 17, fontWeight : 'bold', color : 'red'}}>Remove</Text>
-                             </TouchableOpacity>
-                         </View>
-                          ))}
+                        //      <View key={user.username} style = {{backgroundColor : 'white',  width : '100%' , height : 118 ,borderWidth : 2, borderRadius : 10, padding : 5, flexDirection : 'row', marginBottom : 15, alignItems : 'center', }}>
+                        //      <View style={{ flexDirection : 'column', width : '65%', height : '100%', padding : 5 }}>
+                        //              <Text style={{ fontSize : 23, fontWeight : 'bold'}}>{user.username}</Text>
+                        //              <Text style={{ fontSize : 15,}}><Text style={{ fontWeight : 'bold' }}>Email</Text> : {user.email}</Text>
+                        //              <Text style={{ fontSize : 15}}><Text style={{ fontWeight : 'bold' }}>Privilege</Text> : {user.role}</Text>
+                        //      </View>
+                        //      <TouchableOpacity onPress={() => getbyUsername(user.username)} style={{ width : '30%' , height : '80%', marginLeft : 'auto', borderRadius : 10 , justifyContent : 'center', alignItems  : 'center' , borderWidth : 2,  }}>
+                        //      <Text style={{ fontSize : 17, fontWeight : 'bold', color : 'red'}}>Remove</Text>
+                        //      </TouchableOpacity>
+                        //  </View>
+                        <View key={user.username} style={{ width: '100%', height : 110 ,padding : 7, borderWidth : 2, borderColor : '#2b78d5', borderRadius : 10 , backgroundColor : '#eff7fd', flexDirection : 'row', gap : 10, marginBottom : 10, }}>
+                                  <View style={{ width : '25%', height : '100%', backgroundColor : 'white', borderRadius : 10 , justifyContent : 'center', alignItems : 'center'}}>
+                                          <Icon name="user-alt" size={scale(30)} color='black' />
+                                  </View>
+                                  <View style={{ height : '100%', paddingVertical : 5, justifyContent : 'center' }}>
+                                    <Text style={{ fontSize : scale(18), fontWeight : 'bold' }}>{user.username}</Text>
+                                    <Text style={{ fontSize : scale(12), color : 'gray' }}>{user.email}</Text>
+                                    <Text style={{ fontSize : scale(12),color  : `${user?.role == 'Admin' ? '#c32828': '#2b78d5'}`, fontWeight : 'bold' }}>{user.role}</Text>
+                                  </View>
+                                  <TouchableOpacity onPress={() => AlertDelete(user.username)} style={{ width : '20%', height : '100%', backgroundColor : 'white', marginLeft : 'auto' , borderRadius : 10, justifyContent : 'center', alignItems : 'center' }}>
+                                        <IconX name="delete-forever" size={scale(30)} color="red" />
+                                  </TouchableOpacity>
+                          </View>
+                          ))} 
+                          
+                          {/* <View style={{ width: '100%', minHeight : 100 ,padding : 7, borderWidth : 2 , borderRadius : 10 , backgroundColor : '#eff7fd', flexDirection : 'row', gap : 10}}>
+                                  <View style={{ width : '25%', height : '100%', backgroundColor : 'white', borderRadius : 10 , justifyContent : 'center', alignItems : 'center'}}>
+                                          <Icon name="user-alt" size={scale(30)} color='black' />
+                                  </View>
+                                  <View style={{ height : '100%', paddingVertical : 5 }}>
+                                    <Text style={{ fontSize : scale(18), fontWeight : 'bold' }}>Username</Text>
+                                    <Text style={{ fontSize : scale(12), color : 'gray' }}>example@gmail.com</Text>
+                                    <Text style={{ fontSize : scale(12),color  : `${userData?.role == 'Admin' ? '#c32828': '#2b78d5'}`, fontWeight : 'bold' }}>Admin</Text>
+                                  </View>
+                                  <TouchableOpacity onPress={() => getbyUsername(user.username)} style={{ width : '20%', height : '100%', backgroundColor : 'white', marginLeft : 'auto' , borderRadius : 10, justifyContent : 'center', alignItems : 'center' }}>
+                                        <IconX name="delete-forever" size={scale(30)} color="red" />
+                                  </TouchableOpacity>
+                          </View> */}
                          
                 </ScrollView>
             </View>

@@ -53,7 +53,7 @@ const handleSignUp = async () => {
       navigation.replace('Login');
     } catch (error) {
       console.log(error.message)
-      alert("There was an error creating your account. Please try again later.")
+      alert(error.code)
     }
   }
   

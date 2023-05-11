@@ -88,7 +88,7 @@ const ResetScreen = () => {
             </TouchableOpacity>
       </View>
       <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={backtologin}>
-            <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20}}>Login</Text></Text>
+            <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : '#2b78d5', fontWeight : 'bold' , marginTop : 20}}>Login</Text></Text>
             </TouchableOpacity>
         
       </View>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#848cf9',
+        backgroundColor : '#2b79d5',
         height : 60,
         width : '100%',
         padding : 10,

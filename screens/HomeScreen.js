@@ -286,7 +286,7 @@ useEffect(() => {
 
                   }}
                 >
-                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : 'white' , borderRadius : 15 , padding : 0, borderBottomStartRadius : 16 , borderBottomEndRadius : 0, borderTopEndRadius : 0, borderTopStartRadius : 15  }}>
+                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : 'white' , borderRadius : 15 , padding : 0, borderBottomStartRadius : 16 , borderBottomEndRadius : 0, borderTopEndRadius : 0, borderTopStartRadius : 15, borderWidth : 3, borderColor : '#2b78d5'  }}>
                           <View style= {{ width : '45%' , height : '100%', alignItems : 'center', justifyContent : 'space-evenly' }}>
                                 <View style={{ width : scale(75), height : scale(75), backgroundColor : '#f4f4f4', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
                                      <IconX name="window-closed-variant" size={verticalScale(40)} color="#2b79d5" />
@@ -316,10 +316,10 @@ useEffect(() => {
                                   </Text>
                           </View>
                     </View>
-
+                    {/* {windowMGR ? "Close" : "Open"} */}
 
                     <TouchableOpacity onPress={writeOpenWindow} style= {{ width : '28%' , height : '100%', justifyContent : 'center', alignItems : 'center' , backgroundColor  :windowbtn   , borderBottomStartRadius : 0 , borderBottomEndRadius : 15, borderTopEndRadius : 15, borderTopStartRadius : 0 }}>
-                              <Text style={{ fontSize : scale(22), fontWeight : 'bold', color : 'white' }}>{windowMGR ? "Close" : "Open"}</Text>
+                              <Text style={{ fontSize : scale(22), fontWeight : 'bold', color : 'white' }}>{windowAuto ? "Auto" : `${windowMGR ? "Close" : "Open"}`}</Text>
                     </TouchableOpacity>
                     
 
@@ -334,6 +334,8 @@ useEffect(() => {
                             backgroundColor: "#fff",
                             borderRadius: 15,
                             flexDirection: "row",
+                            borderWidth : 3,
+                            borderColor : '#2b78d5'
                           }}
                         >
                             <View style= {{ width : '35%' , height : '100%', padding : 8, flexDirection : 'column', alignItems : 'center' , justifyContent : 'center' }}>
@@ -436,7 +438,7 @@ useEffect(() => {
                 //   </TouchableOpacity>
                 // </View> 
                 <>
-                  <View style={{ width : '90%', height : '20%' , backgroundColor : 'white', borderRadius : 15, flexDirection : 'row', alignItems : 'center' }}>
+                  <View style={{ width : '90%', height : '18%', borderWidth : 3, borderColor : '#2b78d5' , backgroundColor : 'white', borderRadius : 15, flexDirection : 'row', alignItems : 'center' }}>
                         <View style={{ width : '37%', height : '100%', justifyContent : 'center', alignItems : 'center', borderRadius : 15 }}>
                               <View style={{ width : scale(70), height : scale(70), backgroundColor  : '#f4f4f4', borderRadius : 100,justifyContent : 'center', alignItems : 'center' }}> 
                                   <Icon name="user-alt" size={scale(30)} color="#2b78d5" />
@@ -450,16 +452,16 @@ useEffect(() => {
                         </View>
                   </View>
 
-                  <View style={{ width : '90%', height : '40%', backgroundColor : 'white', borderRadius : 15 }}>
-                    <TouchableOpacity onPress={handlereset} style={{ width : '100%', height  : '20%', padding : 19,borderColor : 'gray', borderBottomWidth : 1, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                  <View style={{ width : '90%', height : '40%',borderWidth : 3, borderColor : '#2b78d5', backgroundColor : 'white', borderRadius : 15 }}>
+                    <TouchableOpacity onPress={handlereset} style={{ width : '100%', height  : 'auto', padding : 19,borderColor : '#2b78d5', borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
                                 <Icon name="user-lock" size={27} color="black" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15) }}>Reset Password</Text>
                     </TouchableOpacity>
-                    { userData?.role == 'Admin' ?  <TouchableOpacity onPress={handleDeleteUser} style={{ width : '100%', height  : '20%',borderColor : 'gray', padding : 19, borderBottomWidth : 1, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                    { userData?.role == 'Admin' ?  <TouchableOpacity onPress={handleDeleteUser} style={{ width : '100%', height  : 'auto',borderColor : '#2b78d5', padding : 19, borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
                                 <Icon name="users" size={27} color="black" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15) }}>Users List</Text>
                     </TouchableOpacity> : ''}
-                    <TouchableOpacity onPress={handleSignOut} style={{ width : '100%', height  : '20%', marginTop  : 'auto',padding : 19, borderTopWidth : 1,borderColor : 'gray', alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                    <TouchableOpacity onPress={handleSignOut} style={{ width : '100%', height  : 'auto', marginTop  : 'auto',padding : 19, borderTopWidth : 2,borderColor : '#2b78d5', alignItems : 'center', flexDirection  :'row', gap : 10 }}>
                                 <Icon name="sign-out-alt" size={27} color="black" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15) }}>Log Out</Text>
                     </TouchableOpacity>
@@ -534,14 +536,16 @@ useEffect(() => {
 
 
         <View style={styles.navBar}>
-             { userData?.role == 'Admin' ? <View style={{ position: 'absolute', width : 120, height : 120 , backgroundColor : '#f2f2f2', borderRadius : 100 , bottom : '22%', left : '36%', justifyContent : 'center', alignItems : 'center' }}>
-                      <TouchableOpacity onPress={handleAddUser}>
-                          <TouchableOpacity onPress={handleAddUser} style={{ width : 100 , height : 100 , backgroundColor : '#2b79d5' , borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
-                              <Icon name="plus"  size={35} color="white"/>      
-                          </TouchableOpacity>
-                      </TouchableOpacity>
-                      
-                  </View> : '' }
+             { userData?.role == 'Admin' ? 
+              <View style={{ position: 'absolute', width : 120, height : 120 , backgroundColor : '#eff7fd', borderRadius : 100 , bottom : '22%', left : '36%', justifyContent : 'center', alignItems : 'center' }}>
+              <TouchableOpacity onPress={handleAddUser} style={{ width: 100, height: 100 }}>
+                <View style={{ width : 100 , height : 100 , backgroundColor : '#2b79d5' , borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
+                  <Icon name="plus" size={35} color="white"/> 
+                </View>
+              </TouchableOpacity>
+             </View>
+             
+             : '' }
 
                 <View style={{ width : '100%', height :'100%' , justifyContent : 'space-between' , alignItems : 'center', flexDirection : 'row' }}>
 
@@ -572,7 +576,7 @@ const styles = StyleSheet.create({
   container : {
     width : '100%',
     height : '100%',
-    backgroundColor : '#f2f2f2',
+    backgroundColor : '#eff7fd',
     flex : 1,
     marginTop : 0,
     alignItems : 'center',

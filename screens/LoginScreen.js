@@ -25,8 +25,8 @@ const LoginScreen = () => {
           if (etest && ptest) {
             try {
               const userCredential = await signInWithEmailAndPassword(auth, etest, ptest);
-              const user = userCredential.user;
-              setUser(user); // store the user data in state or global context
+              // const user = userCredential.user;
+              // setUser(user); // store the user data in state or global context
               navigation.replace('Home');
             } catch (error) {
               console.log(error.message);
@@ -38,47 +38,41 @@ const LoginScreen = () => {
       }, []);
       
 
-
-    const handleLogin = async () => {
-      const userSearch = collection(firestoreDB, "users");
-      console.log(username);
-    
-      // Query Firestore for the user document with the matching username
-      try{
-        const searchQ = query(userSearch, where("username", "==", username));
-        const querySnapshot = await getDocs(searchQ);
+      const handleLogin = async () => {
+        const userSearch = collection(firestoreDB, "users");
+        console.log(username);
       
-     
-    
-      let email = null; // Initialize email to null
-    
-      const doc = querySnapshot.docs[0];
-        setSmartEmail(doc.data().email)
-        email = doc.data().email; // Update email value
-    
-    
-      // Check if email value is not null before logging in
-      if (email !== null) {
-        console.log(email);
         try {
-          const logUser = await signInWithEmailAndPassword(auth, email, password);
-    
-          // rememberMe is a boolean value indicating whether the user wants to be remembered
-          await AsyncStorage.setItem("smartemail", email); // save the user's email to local storage
-          await AsyncStorage.setItem("smartpassword", password); // save the user's password to local storage
-    
-          console.log("Logged in successfully" + logUser.user.email + logUser.user.password);
-          navigation.replace("Home");
+          const searchQ = query(userSearch, where("username", "==", username));
+          const querySnapshot = await getDocs(searchQ);
+      
+          let email = null;
+          const doc = querySnapshot.docs[0];
+          setSmartEmail(doc.data().email);
+          email = doc.data().email;
+      
+          if (email !== null) {
+            console.log(email);
+            try {
+              const logUser = await signInWithEmailAndPassword(auth, email, password);
+              await AsyncStorage.setItem("smartemail", email);
+              await AsyncStorage.setItem("smartpassword", password);
+      
+              // console.log("Logged in successfully" + logUser.user.email + logUser.user.password);
+              navigation.replace("Home");
+            } catch (error) {
+              alert(error.code)
+            }
+          } else {
+            alert("USER Doesn't exist");
+          }
         } catch (error) {
-          console.log(error.message);
+          if(error.code = "Cannot read property 'data' of undefined") { 
+             return alert("USER Doesn't exist");
+          }
+          alert("There was a problem with the network connection. Please try again later.");
         }
-      } else {
-        alert("USER Doesn't exist");
-      }
-    }catch(error){
-        return alert(error)
-       }
-    };
+      };
     
 
 
@@ -151,7 +145,7 @@ const LoginScreen = () => {
 
         
                 <TouchableOpacity onPress={handleforgot} >
-                <Text  style={{  color : 'gray',  }}>Forgot password ?/ <Text style={{fontSize : 18 , color : 'black', fontWeight : 'bold'}}>  Reset</Text> </Text>
+                <Text  style={{  color : 'gray', fontWeight : 'bold' }}>Forgot password ?</Text>
                 </TouchableOpacity>
                
                 
