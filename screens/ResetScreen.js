@@ -52,8 +52,8 @@ const ResetScreen = () => {
         <View  
             style={{width : '80%'}}        
         >
-            <Text style={{fontSize : 40 , fontWeight : 'bold'}}>Reset</Text>
-            <Text style={{fontSize : 40 , fontWeight : 'bold'}}>Password</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#8cdb4e'}}>Reset</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#8cdb4e'}}>Password</Text>
 
             <Text style={{fontSize : 18 , color : 'gray' , marginTop : 20}}>We will send you a reset password email</Text>
 
@@ -67,6 +67,7 @@ const ResetScreen = () => {
                     <TextInput
                         
                         placeholder="Email"
+                        placeholderTextColor='#424242'
                         value={email}
                         onChangeText={text => setEmail(text)}
                         style={[styles.input, isFocused && { backgroundColor: '#b9b9b9' , fontSize : 20}]}
@@ -88,7 +89,7 @@ const ResetScreen = () => {
             </TouchableOpacity>
       </View>
       <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={backtologin}>
-            <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : '#2b78d5', fontWeight : 'bold' , marginTop : 20}}>Login</Text></Text>
+            <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : '#8cdb4e', fontWeight : 'bold' , marginTop : 20}}>Login</Text></Text>
             </TouchableOpacity>
         
       </View>
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         alignItems : 'center',
         gap : 60,
-        backgroundColor : '#fff',
+        backgroundColor : '#1c1c1c',
     },
 
     inputContainer : {
@@ -123,13 +124,14 @@ const styles = StyleSheet.create({
     input : {
         backgroundColor: 'white',
         paddingHorizontal : 15,
+        color : 'white',
         height : 60,
         fontWeight : 'bold',
         fontSize : 17,
         paddingVertical : 10,
         borderRadius : 10,
         borderBottomWidth : 1,
-        backgroundColor : '#f5f5f5',
+        backgroundColor : '#2e2e2e',
         borderBottomColor : 'gray',
         marginTop : 0 ,
     },
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#2b79d5',
+        backgroundColor : '#8cdb4e',
         height : 60,
         width : '100%',
         padding : 10,

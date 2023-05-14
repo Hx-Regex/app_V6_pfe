@@ -114,7 +114,7 @@ const handleSignUp = async () => {
         <View  
             style={{width : '80%' , justifyContent : "center" , alignItems : 'center'}}        
         >
-            <Text style={{fontSize : 40 , fontWeight : 'bold'}}>Add User</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#00989d'}}>Add User</Text>
             {/* <TouchableOpacity onPress={backtologin}>
             <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to /  <Text style={{fontSize : 20 , color : 'black', fontWeight : 'bold'}}>Login In</Text></Text>
             </TouchableOpacity> */}
@@ -127,6 +127,7 @@ const handleSignUp = async () => {
                      <TextInput
                         
                         placeholder="Username"
+                        placeholderTextColor='white'
                         value={username}
                         onChangeText={text => setUsername(text)}
                         style={[styles.input, isFocused3 && { backgroundColor: '#bababa' , fontSize : 20}]}
@@ -138,6 +139,7 @@ const handleSignUp = async () => {
                         
                         placeholder="Email"
                         value={email}
+                        placeholderTextColor='white'
                         onChangeText={text => setEmail(text)}
                         style={[styles.input, isFocused && { backgroundColor: '#bababa' , fontSize : 20}]}
                         onFocus={handleFocus}
@@ -148,6 +150,7 @@ const handleSignUp = async () => {
             <TextInput
                 placeholder="Password"
                 value={password}
+                placeholderTextColor='white'
                 onChangeText={text => setPassword(text)}
                 style={[styles.input, isFocused2 && { backgroundColor: '#bababa' , fontSize : 20}]}
                         onFocus={handleFocus2}
@@ -156,11 +159,11 @@ const handleSignUp = async () => {
             />
                 <View style={{ width : '100%'}}>
                         <Dropdown
-                                style={ { padding : 10, backgroundColor : '#f5f5f5', borderRadius : 10 , borderBottomWidth : 1, marginTop : 15  } }
-                                placeholderStyle={ { color : 'gray' , fontWeight : 'bold' }}
-                                selectedTextStyle={styles.selectedTextStyle}
+                                style={ { padding : 10, backgroundColor : '#2e2e2e', borderRadius : 10 , color : 'white', borderBottomWidth : 1, marginTop : 15, borderColor : '#00989d'  } }
+                                placeholderStyle={ { color : 'white' , fontWeight : 'bold' }}
+                                selectedTextStyle={{ color : `${value == 'Admin' ? 'red' : '#00989d'}` , marginLeft : 8, fontWeight : 'bold' }}
                                 inputSearchStyle={styles.inputSearchStyle}
-                                iconStyle={styles.iconStyle}
+                                iconStyle={{}}
                                 data={data}
                                 maxHeight={300}
                                 labelField="label"
@@ -176,7 +179,7 @@ const handleSignUp = async () => {
                                 renderLeftIcon={() => (
                                     <AntDesign
                                     style={styles.icon}
-                                    color={isFocus ? 'blue' : 'black'}
+                                    color={value == 'Admin' ? 'red' : '#00989d'}
                                     name="Safety"
                                     size={20}
                                     />
@@ -195,7 +198,7 @@ const handleSignUp = async () => {
         
       </View>
             <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={backtologin}>
-                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : '#2b79d5'}}>Home</Text></Text>
+                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : '#00989d'}}>Home</Text></Text>
             </TouchableOpacity>
         
         
@@ -221,7 +224,7 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         alignItems : 'center',
         gap : 60,
-        backgroundColor : '#fff',
+        backgroundColor : '#1c1c1c',
     },
 
     inputContainer : {
@@ -229,16 +232,17 @@ const styles = StyleSheet.create({
     },
 
     input : {
-        backgroundColor: 'white',
+        backgroundColor: '#2e2e2e',
         paddingHorizontal : 15,
+        color : 'white',
         height : 60,
         fontWeight : 'bold',
         fontSize : 17,
         paddingVertical : 10,
         borderRadius : 10,
         borderBottomWidth : 1,
-        backgroundColor : '#f5f5f5',
-        borderBottomColor : 'gray',
+        backgroundColor : '#2e2e2e',
+        borderBottomColor : '#00989d',
         marginTop : 20 ,
     },
 
@@ -252,7 +256,7 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#2b79d5',
+        backgroundColor : '#00989d',
         height : 60,
         width : '100%',
         padding : 10,
