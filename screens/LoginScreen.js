@@ -18,7 +18,8 @@ const LoginScreen = () => {
 
     useEffect(() => {
         async function fetchData() {
-        
+          
+          setLoading(true);
           const etest = await AsyncStorage.getItem('smartemail');
           const ptest = await AsyncStorage.getItem('smartpassword');
           console.log(etest,ptest)
@@ -32,6 +33,7 @@ const LoginScreen = () => {
               console.log(error.message);
             }
           }
+          setLoading(false);
         }
       
         fetchData();
@@ -41,43 +43,44 @@ const LoginScreen = () => {
       const [loading, setLoading] = useState(false);
 
       const handleLogin = async () => {
-       setLoading(true);
-       const userSearch = collection(firestoreDB, "users");
-       console.log(username);
-       
-       try {
-       const searchQ = query(userSearch, where("username", "==", username));
-       const querySnapshot = await getDocs(searchQ);
-       
-       let email = null;
-       const doc = querySnapshot.docs[0];
-       setSmartEmail(doc.data().email);
-       email = doc.data().email;
-       
-       if (email !== null) {
-       console.log(email);
-       try {
-       const logUser = await signInWithEmailAndPassword(auth, email, password);
-       await AsyncStorage.setItem("smartemail", email);
-       await AsyncStorage.setItem("smartpassword", password);
-       
-       // console.log("Logged in successfully" + logUser.user.email + logUser.user.password);
-       navigation.replace("Home");
-       } catch (error) {
-       alert(error.code)
-       }
-       } else {
-       alert("USER Doesn't exist");
-       }
-       } catch (error) {
-       if(error.code = "Cannot read property 'data' of undefined") { 
-       return alert("USER Doesn't exist");
-       }
-       alert("There was a problem with the network connection. Please try again later.");
-       } finally {
-       setLoading(false);
-       }
+        setLoading(true); // Start loading state
+        console.log(username); // Log the username for debugging purposes
+        
+        // Create a reference to the "users" collection in Firestore
+        const userSearch = collection(firestoreDB, "users");
+        
+        try {
+          // Create a query to search for a user with the given username
+          const searchQ = query(userSearch, where("username", "==", username));
+          const querySnapshot = await getDocs(searchQ); // Execute the query and get a snapshot of the result
+          
+          // Get the email of the first user returned by the query
+          const doc = querySnapshot.docs[0];
+          if (!doc) { // If no user is found, throw an error
+            throw new Error("User doesn't exist");
+          }
+          const email = doc.data().email;
+          setSmartEmail(email); // Set the smart email state to the user's email
+          
+          // Log in the user with the email and password
+          const logUser = await signInWithEmailAndPassword(auth, email, password);
+          
+          // Save the email and password to AsyncStorage
+          await AsyncStorage.setItem("smartemail", email);
+          await AsyncStorage.setItem("smartpassword", password);
+          
+          navigation.replace("Home"); // Navigate to the home screen
+        } catch (error) {
+          if (error.message === "User doesn't exist") {
+            alert("User doesn't exist");
+          } else {
+            alert("There was a problem with the network connection. Please try again later.");
+          }
+        } finally {
+          setLoading(false); // Stop loading state
+        }
       };
+      
       
     
 
@@ -121,7 +124,7 @@ const LoginScreen = () => {
             style={{width : '80%', justifyContent :'center', alignItems : 'center'}}        
         >
             {/* <Text style={{fontSize : 40 , fontWeight : 'bold'}}>Welcome</Text> */}
-            <Text style={{fontSize : 40 , fontWeight : 'bold', color : "#00989d"}}>Login Now</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : "#02c38e"}}>Login Now</Text>
            
         </View>
         
@@ -155,7 +158,7 @@ const LoginScreen = () => {
 
         
                 <TouchableOpacity onPress={handleforgot} >
-                <Text  style={{  color : 'gray', fontWeight : 'bold' }}>Forgot password ?</Text>
+                <Text  style={{  color : '#02c38e', fontWeight : 'bold' }}>Forgot password ?</Text>
                 </TouchableOpacity>
                
                 
@@ -215,10 +218,10 @@ const styles = StyleSheet.create({
         color : 'white',
         fontSize : 17,
         paddingVertical : 10,
-        borderRadius : 10,
-        borderBottomWidth : 1,
+        borderRadius : 5,
+        borderBottomWidth : 3,
         backgroundColor : '#2e2e2e',
-        borderBottomColor : '#00989d',
+        borderBottomColor : '#02c38e',
         marginTop : 20 ,
     },
 
@@ -232,11 +235,11 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#00989d',
+        backgroundColor : '#02c38e',
         height : 60,
         width : '100%',
         padding : 10,
-        borderRadius : 10,
+        borderRadius : 5,
         alignItems : 'center'
     },
 

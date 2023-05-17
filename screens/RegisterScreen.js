@@ -1,6 +1,6 @@
 import { KeyboardAvoidingView,Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,  } from 'firebase/auth';
 import { doc, setDoc } from "firebase/firestore";
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
@@ -114,7 +114,7 @@ const handleSignUp = async () => {
         <View  
             style={{width : '80%' , justifyContent : "center" , alignItems : 'center'}}        
         >
-            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#00989d'}}>Add User</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#02c38e'}}>Add User</Text>
             {/* <TouchableOpacity onPress={backtologin}>
             <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to /  <Text style={{fontSize : 20 , color : 'black', fontWeight : 'bold'}}>Login In</Text></Text>
             </TouchableOpacity> */}
@@ -159,9 +159,9 @@ const handleSignUp = async () => {
             />
                 <View style={{ width : '100%'}}>
                         <Dropdown
-                                style={ { padding : 10, backgroundColor : '#2e2e2e', borderRadius : 10 , color : 'white', borderBottomWidth : 1, marginTop : 15, borderColor : '#00989d'  } }
+                                style={ { padding : 10, backgroundColor : '#2e2e2e', borderRadius : 5 , color : 'white', borderBottomWidth : 3, marginTop : 15, borderColor : '#02c38e'  } }
                                 placeholderStyle={ { color : 'white' , fontWeight : 'bold' }}
-                                selectedTextStyle={{ color : `${value == 'Admin' ? 'red' : '#00989d'}` , marginLeft : 8, fontWeight : 'bold' }}
+                                selectedTextStyle={{ color : `${value == 'Admin' ? 'red' : '#02c38e'}` , marginLeft : 8, fontWeight : 'bold' }}
                                 inputSearchStyle={styles.inputSearchStyle}
                                 iconStyle={{}}
                                 data={data}
@@ -179,7 +179,7 @@ const handleSignUp = async () => {
                                 renderLeftIcon={() => (
                                     <AntDesign
                                     style={styles.icon}
-                                    color={value == 'Admin' ? 'red' : '#00989d'}
+                                    color={value == 'Admin' ? 'red' : '#02c38e'}
                                     name="Safety"
                                     size={20}
                                     />
@@ -198,7 +198,7 @@ const handleSignUp = async () => {
         
       </View>
             <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={backtologin}>
-                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : '#00989d'}}>Home</Text></Text>
+                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : '#02c38e'}}>Home</Text></Text>
             </TouchableOpacity>
         
         
@@ -239,10 +239,10 @@ const styles = StyleSheet.create({
         fontWeight : 'bold',
         fontSize : 17,
         paddingVertical : 10,
-        borderRadius : 10,
-        borderBottomWidth : 1,
+        borderRadius : 5,
+        borderBottomWidth : 3,
         backgroundColor : '#2e2e2e',
-        borderBottomColor : '#00989d',
+        borderBottomColor : '#02c38e',
         marginTop : 20 ,
     },
 
@@ -256,11 +256,11 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#00989d',
+        backgroundColor : '#02c38e',
         height : 60,
         width : '100%',
         padding : 10,
-        borderRadius : 10,
+        borderRadius : 5,
         alignItems : 'center'
     },
 

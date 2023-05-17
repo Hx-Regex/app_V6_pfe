@@ -24,6 +24,7 @@ const HomeScreen = () => {
   const [Humidity, setHumidity] = useState(0)
   const [windowMGR, setWindowMGR] = useState(false)
   const [windowAuto, setWindowAuto] = useState(false)
+  const [windowState, setWindowState] = useState(false)
   const [loading, setLoading] = useState(false)
 
 
@@ -86,7 +87,7 @@ const HomeScreen = () => {
     const updatedAllValue = {
       ...allValue,
       Auto: !windowAuto,
-      Window: false,
+      Window : windowState,
     };
     
     set(allRef, updatedAllValue);
@@ -100,7 +101,8 @@ const HomeScreen = () => {
       
       const updatedAllValue = {
         ...allValue,
-        Window: !windowMGR
+        Window: !windowMGR,
+        State : !windowMGR
       };
       
       set(allRef, updatedAllValue);
@@ -136,48 +138,53 @@ const HomeScreen = () => {
 //      }
 useEffect(() => {
   setLoading(true);
- 
-  getDataFromDb()
+
+  getDataFromDb();
   const interval = setInterval(() => {
-  
-  const Tempdir = ref(db, 'All/Temp');
-  onValue(Tempdir, (snapshot) => {
-  const data = snapshot.val();
-  setTemperature(data);
-  });
- 
-  const Stockdir = ref(db, 'All/Coffee');
-  onValue(Stockdir, (snapshot) => {
-  const data = snapshot.val();
-  setStock(data)
-  });
- 
-  const Humiddir = ref(db, 'All/Humid');
-  onValue(Humiddir, (snapshot) => {
-  const data = snapshot.val();
-  setHumidity(data)
-  });
-  const AutoWind = ref(db, 'All/Auto');
-  onValue(AutoWind, (snapshot) => {
-  const data = snapshot.val();
-  setWindowAuto(data)
-  });
-  const WindState = ref(db, 'All/Window');
-  onValue(WindState, (snapshot) => {
-  const data = snapshot.val();
-  setWindowMGR(data)
-  });
- 
- 
+    const Tempdir = ref(db, 'All/Temp');
+    onValue(Tempdir, (snapshot) => {
+      const data = snapshot.val();
+      setTemperature(data);
+    });
+
+    const Stockdir = ref(db, 'All/Coffee');
+    onValue(Stockdir, (snapshot) => {
+      const data = snapshot.val();
+      setStock(data)
+    });
+
+    const Humiddir = ref(db, 'All/Humid');
+    onValue(Humiddir, (snapshot) => {
+      const data = snapshot.val();
+      setHumidity(data)
+    });
+    const AutoWind = ref(db, 'All/Auto');
+    onValue(AutoWind, (snapshot) => {
+      const data = snapshot.val();
+      setWindowAuto(data)
+    });
+    const WindCMD = ref(db, 'All/Window');
+    onValue(WindCMD, (snapshot) => {
+      const data = snapshot.val();
+      setWindowMGR(data)
+    });
+    const WindState = ref(db, 'All/State');
+    onValue(WindState, (snapshot) => {
+      const data = snapshot.val();
+      setWindowState(data)
+      if (data !== null) {
+        setLoading(false);
+      }
+    });
+    
   }, 1000);
-  
-  setTimeout(() => {
-  setLoading(false);
-  }, 1200);
- 
-  return () => clearInterval(interval);
- }, []);
- 
+
+  return () => {
+    clearInterval(interval);
+  };
+}, []);
+
+
 
 
 
@@ -211,9 +218,9 @@ useEffect(() => {
     const stocknotifbg = stocknotif ? '#2b79d5' : '#b5b5b5'
     const windowbg = windowMGR ? '#2b79d5' : '#b5b5b5'
     const temponotifbg = tempNotif ? '#2b79d5' : '#b5b5b5'
-    const homebg = !infopage && !stockpage  ? '#00989d' : '#424242'
-    const infobg = infopage && !stockpage ? '#00989d' : '#424242'
-    const  windowbtn = windowAuto ? '#2e2e2e' : `${windowMGR ? 'red' : '#00989d'}`
+    const homebg = !infopage && !stockpage  ? '#02c38e' : '#424242'
+    const infobg = infopage && !stockpage ? '#02c38e' : '#424242'
+    const  windowbtn = windowAuto ? '#2e2e2e' : `${windowMGR ? 'red' : '#02c38e'}`
 
 
    
@@ -266,22 +273,22 @@ useEffect(() => {
           !infopage && !stockpage ? (
             <>
               <View style={styles.statscontainer}>
-                <View style={{  width : '45%', height : '100%' , backgroundColor : '#2d2d2d', flexDirection : 'column', justifyContent : 'space-evenly', alignItems  : 'center' , borderRadius : 15, borderWidth : 0, borderColor : "#00989d" }}>
+                <View style={{  width : '45%', height : '100%' , backgroundColor : '#2d2d2d', flexDirection : 'column', justifyContent : 'space-evenly', alignItems  : 'center' , borderRadius : 7, borderWidth : 0, borderColor : "#02c38e" }}>
                     <View style= {{ width : scale(65) , height : scale(65), borderRadius : 100, backgroundColor : '#434343', justifyContent : 'center', alignItems : 'center' }}>
-                          <Icon name="temperature-high" size={scale(30)} color="#00989d" />
+                          <Icon name="temperature-high" size={scale(30)} color="#02c38e" />
                     </View>
                     <Text style={{ fontSize : scale(16), fontWeight : 'bold', color : 'white' }}>Temperature</Text>
-                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#00989d'}}>{Temperature}°C</Text>
+                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#02c38e'}}>{Temperature}°C</Text>
                
                
                </View>
 
-               <View style={{  width : '45%', height : '100%' , backgroundColor : '#2d2d2d', flexDirection : 'column', justifyContent : 'space-evenly', alignItems  : 'center' , borderRadius : 15, borderWidth : 0, borderColor : "#00989d"   }}>
+               <View style={{  width : '45%', height : '100%' , backgroundColor : '#2d2d2d', flexDirection : 'column', justifyContent : 'space-evenly', alignItems  : 'center' , borderRadius : 7, borderWidth : 0, borderColor : "#02c38e"   }}>
                     <View style= {{ width : scale(65) , height : scale(65), borderRadius : 100, backgroundColor : '#434343', justifyContent : 'center', alignItems : 'center' }}>
-                          <IconX name="water" size={scale(40)} color="#00989d" />
+                          <IconX name="water" size={scale(40)} color="#02c38e" />
                     </View>
                     <Text style={{ fontSize : scale(16), fontWeight : 'bold', color : 'white' }}>Humidity</Text>
-                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#00989d'}}>{Humidity}%</Text>
+                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#02c38e'}}>{Humidity}%</Text>
                
                
                </View>
@@ -297,14 +304,14 @@ useEffect(() => {
 
                   }}
                 >
-                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : '#2d2d2d' , borderRadius : 15 , padding : 0, borderBottomStartRadius : 16 , borderBottomEndRadius : 0, borderTopEndRadius : 0, borderTopStartRadius : 15, borderWidth : 0, borderColor : '#00989d'  }}>
+                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : '#2d2d2d', padding : 0, borderBottomStartRadius : 7 , borderBottomEndRadius : 0, borderTopEndRadius : 0, borderTopStartRadius : 7, borderWidth : 0, borderColor : '#02c38e'  }}>
                           <View style= {{ width : '45%' , height : '100%', alignItems : 'center', justifyContent : 'space-evenly' }}>
                                 <View style={{ width : scale(75), height : scale(75), backgroundColor : '#434343', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
-                                     <IconX name="window-closed-variant" size={verticalScale(40)} color="#00989d" />
+                                     <IconX name="window-closed-variant" size={verticalScale(40)} color="#02c38e" />
                                      
                                 </View>
                                 <Switch
-                                  trackColor={{ false: "#b5b5b5", true: "#00989d" }}
+                                  trackColor={{ false: "#b5b5b5", true: "#02c38e" }}
                                   thumbColor={"#fff"}
                                   ios_backgroundColor="#3e3e3e"
                                   onValueChange={writeAutoWind}
@@ -325,11 +332,16 @@ useEffect(() => {
                                    >
                                   {windowAuto ? "Automatic" : "Manual"} Mode
                                   </Text>
+                                  <Text
+                                     style={{ fontSize: scale(14), fontWeight: "bold", color: "gray", marginTop : 'auto' }}
+                                   >
+                                     Window is {windowState ? "Opened" : "Closed"} 
+                                  </Text>
                           </View>
                     </View>
                     {/* {windowMGR ? "Close" : "Open"} */}
 
-                    <TouchableOpacity onPress={writeOpenWindow} style= {{ width : '28%' , height : '100%', justifyContent : 'center', alignItems : 'center' , backgroundColor  :windowbtn   , borderBottomStartRadius : 0 , borderBottomEndRadius : 15, borderTopEndRadius : 15, borderTopStartRadius : 0 }}>
+                    <TouchableOpacity onPress={writeOpenWindow} style= {{ width : '28%' , height : '100%', justifyContent : 'center', alignItems : 'center' , backgroundColor  :windowbtn   , borderBottomStartRadius : 0 , borderBottomEndRadius : 7, borderTopEndRadius : 7, borderTopStartRadius : 0 }}>
                               <Text style={{ fontSize : scale(22), fontWeight : 'bold', color : 'white' }}>{windowAuto ? "Auto" : `${windowMGR ? "Close" : "Open"}`}</Text>
                     </TouchableOpacity>
                     
@@ -343,15 +355,15 @@ useEffect(() => {
                             width: "100%",
                             height: "43%",
                             backgroundColor: "#2e2e2e",
-                            borderRadius: 15,
+                            borderRadius: 7,
                             flexDirection: "row",
                             borderWidth : 0,
-                            borderColor : '#00989d'
+                            borderColor : '#02c38e'
                           }}
                         >
                             <View style= {{ width : '35%' , height : '100%', padding : 8, flexDirection : 'column', alignItems : 'center' , justifyContent : 'center' }}>
                                   <View style={{ width : scale(75), height : scale(75), backgroundColor : '#424242', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
-                                        <IconX name="food" size={verticalScale(40)} color="#00989d" />
+                                        <IconX name="food" size={verticalScale(40)} color="#02c38e" />
                                   </View>
                             </View>
                             <View style= {{ paddingVertical : 8, justifyContent : 'center' }}>
@@ -360,7 +372,7 @@ useEffect(() => {
                             </View>
                             <View style= {{ justifyContent : 'center', alignitems : 'center' , width : '30%' }}>
                                <View style={{ justifyContent : 'center', alignItems : 'center', marginLeft : 'auto' , marginRight : 15 }}>
-                                   <Icon name="external-link-alt" size={verticalScale(25)} color="#00989d" />
+                                   <Icon name="external-link-alt" size={verticalScale(25)} color="#02c38e" />
                                </View>
                             </View>
                           
@@ -449,32 +461,32 @@ useEffect(() => {
                 //   </TouchableOpacity>
                 // </View> 
                 <>
-                  <View style={{ width : '90%', height : '18%', borderWidth : 0, borderColor : '#2e2e2e' , backgroundColor : '#2e2e2e', borderRadius : 15, flexDirection : 'row', alignItems : 'center' }}>
+                  <View style={{ width : '90%', height : '18%', borderWidth : 0, borderColor : '#2e2e2e' , backgroundColor : '#2e2e2e', borderRadius : 7, flexDirection : 'row', alignItems : 'center' }}>
                         <View style={{ width : '37%', height : '100%', justifyContent : 'center', alignItems : 'center', borderRadius : 15 }}>
                               <View style={{ width : scale(70), height : scale(70), backgroundColor  : '#424242', borderRadius : 100,justifyContent : 'center', alignItems : 'center' }}> 
-                                  <Icon name="user-alt" size={scale(30)} color="#00989d" />
+                                  <Icon name="user-alt" size={scale(30)} color="#02c38e" />
                               </View>
 
                         </View>
                         <View style= {{ width : '63%', height : '100%', justifyContent : 'center', overflow : 'hidden' }}>
                              <Text style={{ fontSize  : scale(18), color : 'gray'  }}>Username : <Text style={{ fontWeight  : 'bold', color : 'white'  }}>{userData?.username}</Text></Text>
-                             <Text style={{ fontSize  : scale(15), color : 'gray'  }}>Role : <Text style={{ fontWeight  : 'bold', color  : `${userData?.role == 'Admin' ? 'red': '#00989d'}` }}>{userData?.role}</Text></Text>
+                             <Text style={{ fontSize  : scale(15), color : 'gray'  }}>Role : <Text style={{ fontWeight  : 'bold', color  : `${userData?.role == 'Admin' ? 'red': '#02c38e'}` }}>{userData?.role}</Text></Text>
                              <Text style={{ fontSize  : scale(13), color : 'gray'  }}>Email : <Text style={{ fontWeight  : 'bold', color : 'white' }}>{userData?.email}</Text></Text>
                         </View>
                   </View>
 
-                  <View style={{ width : '90%', height : '40%',borderWidth : 0, borderColor : '#2b78d5', backgroundColor : '#2e2e2e', borderRadius : 15 }}>
+                  <View style={{ width : '90%', height : '40%',borderWidth : 0, borderColor : '#2b78d5', backgroundColor : '#2e2e2e', borderRadius : 7 }}>
                     <TouchableOpacity onPress={handlereset} style={{ width : '100%', height  : 'auto', padding : 19,borderColor : '#424242', borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
-                                <Icon name="user-lock" size={27} color="white" />
-                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : 'white'  }}>Reset Password</Text>
+                                <Icon name="user-lock" size={27} color="#8d8d8d" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d'  }}>Reset Password</Text>
                     </TouchableOpacity>
                     { userData?.role == 'Admin' ?  <TouchableOpacity onPress={handleDeleteUser} style={{ width : '100%', height  : 'auto',borderColor : '#424242', padding : 19, borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
-                                <Icon name="users" size={27} color="white" />
-                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : 'white'  }}>Users List</Text>
+                                <Icon name="users" size={27} color="#8d8d8d" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d'  }}>Users List</Text>
                     </TouchableOpacity> : ''}
                     <TouchableOpacity onPress={handleSignOut} style={{ width : '100%', height  : 'auto', marginTop  : 'auto',padding : 19, borderTopWidth : 2,borderColor : '#424242', alignItems : 'center', flexDirection  :'row', gap : 10 }}>
-                                <Icon name="sign-out-alt" size={27} color="white" />
-                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : 'white' }}>Log Out</Text>
+                                <Icon name="sign-out-alt" size={27} color="#8d8d8d" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d' }}>Log Out</Text>
                     </TouchableOpacity>
 
                   </View>
@@ -483,45 +495,45 @@ useEffect(() => {
 
 
         {stockpage ?
-        <View style= {{ width : '96%', height : 'auto' , backgroundColor : '#2e2e2e', borderWidth : 0, borderColor : '#2b79d5', borderRadius : 20 , flexDirection : 'column', paddingVertical : 30, gap : 20 }}>
+        <View style= {{ width : '96%', height : 'auto' , backgroundColor : '#2e2e2e', borderWidth : 0, borderColor : '#2b79d5', borderRadius : 7 , flexDirection : 'column', paddingVertical : 30, gap : 20 }}>
         <View style= {{ width : '100%', height : 90 , justifyContent : 'center', alignItems : 'center', flexDirection : 'column', gap : 10 }}>
                   <View style= {{ flexDirection : 'row' , alignItems : 'center' , gap : 10 }}> 
-                        <Icon name="coffee" size={20} color="#00989d" />
+                        <Icon name="coffee" size={20} color="#02c38e" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold', color : 'white'}}>Coffee Capsules</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#424242', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 0, backgroundColor : '#424242', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
                         <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>{Stock} / 100</Text>   
                     </View>
-                    <View style={{  width : `${Stock}%`, height  : '100%', borderRadius : 30 , backgroundColor : '#00989d'}}>         
+                    <View style={{  width : `${Stock}%`, height  : '100%', borderRadius : 30 , backgroundColor : '#02c38e'}}>         
                     </View>
                   </View>
         </View>
 
         <View style= {{ width : '100%', height : 90 , justifyContent : 'center', alignItems : 'center', flexDirection : 'column', gap : 10 }}>
                   <View style= {{ flexDirection : 'row' , alignItems : 'center' , gap : 10 }}> 
-                        <Icon name="candy-cane" size={20} color="#00989d" />
+                        <Icon name="candy-cane" size={20} color="#02c38e" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold', color : 'white'}}>Sugar Packets</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#424242', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 0, backgroundColor : '#424242', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
                         <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>20 / 40</Text>   
                     </View>
-                    <View style={{  width : '50%', height  : '100%', borderRadius : 30,backgroundColor : '#00989d'}}>         
+                    <View style={{  width : '50%', height  : '100%', borderRadius : 30,backgroundColor : '#02c38e'}}>         
                     </View>
                   </View>
         </View>
 
         <View style= {{ width : '100%', height : 90 , justifyContent : 'center', alignItems : 'center', flexDirection : 'column', gap : 10 }}>
                   <View style= {{ flexDirection : 'row' , alignItems : 'center' , gap : 10 }}> 
-                        <IconX name="tea" size={25} color="#00989d" />
+                        <IconX name="tea" size={25} color="#02c38e" />
                         <Text style= {{ fontSize : 18 , fontWeight : 'bold', color : 'white'}}>Tea Packets</Text>                                             
                   </View>
-                  <View style= {{ width : '90%', height : '40%', padding : 3, backgroundColor : '#424242', borderRadius : 40, position  : 'relative', }}>
+                  <View style= {{ width : '90%', height : '40%', padding : 0, backgroundColor : '#424242', borderRadius : 40, position  : 'relative', }}>
                     <View style={{  width : '100%', height  : '100%' , position : 'absolute', borderRadius : 30  , justifyContent : 'center', alignItems : 'center' , zIndex : 999 }}>
                         <Text style= {{ fontSize : 17 , fontWeight : 'bold', color : 'white'}}>30 / 55</Text>   
                     </View>
-                    <View style={{  width : '66%', height  : '100%', borderRadius : 30 , backgroundColor : '#00989d'}}>         
+                    <View style={{  width : '66%', height  : '100%', borderRadius : 30 , backgroundColor : '#02c38e'}}>         
                     </View>
                   </View>
         </View>
@@ -543,7 +555,7 @@ useEffect(() => {
                               <TouchableOpacity onPress={() => {setInfopage(false); setStockpage(false)}}><Icon name="home"  size={verticalScale(30)} color={homebg} /></TouchableOpacity>
                       </View>
                       { userData?.role == 'Admin' ?    
-                         <TouchableOpacity onPress={handleAddUser} style={{ width : "30%", height : '95%', backgroundColor : '#00989d', borderRadius : 15, justifyContent : 'center', alignItems : 'center' }}>
+                         <TouchableOpacity onPress={handleAddUser} style={{ width : "30%", height : '100%', backgroundColor : '#02c38e', borderRadius : 10, justifyContent : 'center', alignItems : 'center' }}>
                               <Icon name="user-plus"  size={verticalScale(30)} color='white'/>
                         </TouchableOpacity>
                          : '' }
@@ -584,7 +596,6 @@ const styles = StyleSheet.create({
     height : '25%',
     borderRadius : 20,
     flexDirection : 'row',
-    padding : 8,
     justifyContent : 'space-between'
 
   },
@@ -598,12 +609,12 @@ const styles = StyleSheet.create({
   },
   navBar : {
     
-    width : '95%',
-    height : "10%",
+    width : '100%',
+    height : "8%",
     backgroundColor : '#2d2d2d',
     position : 'absolute',
-    bottom : '0.5%',
-    borderRadius : 15
+    bottom : '0%',
+    borderRadius : 0
   },
   stats : {
     width : '50%',

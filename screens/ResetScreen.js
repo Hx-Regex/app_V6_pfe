@@ -52,8 +52,8 @@ const ResetScreen = () => {
         <View  
             style={{width : '80%'}}        
         >
-            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#8cdb4e'}}>Reset</Text>
-            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#8cdb4e'}}>Password</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#02c38e'}}>Reset</Text>
+            <Text style={{fontSize : 40 , fontWeight : 'bold', color : '#02c38e'}}>Password</Text>
 
             <Text style={{fontSize : 18 , color : 'gray' , marginTop : 20}}>We will send you a reset password email</Text>
 
@@ -89,7 +89,7 @@ const ResetScreen = () => {
             </TouchableOpacity>
       </View>
       <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={backtologin}>
-            <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : '#8cdb4e', fontWeight : 'bold' , marginTop : 20}}>Login</Text></Text>
+            <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : '#02c38e', fontWeight : 'bold' , marginTop : 20}}>Login</Text></Text>
             </TouchableOpacity>
         
       </View>
@@ -129,10 +129,10 @@ const styles = StyleSheet.create({
         fontWeight : 'bold',
         fontSize : 17,
         paddingVertical : 10,
-        borderRadius : 10,
-        borderBottomWidth : 1,
+        borderRadius : 5,
+        borderBottomWidth : 3,
         backgroundColor : '#2e2e2e',
-        borderBottomColor : 'gray',
+        borderBottomColor : '#02c38e',
         marginTop : 0 ,
     },
 
@@ -146,11 +146,11 @@ const styles = StyleSheet.create({
     button : {
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : '#8cdb4e',
+        backgroundColor : '#02c38e',
         height : 60,
         width : '100%',
         padding : 10,
-        borderRadius : 10,
+        borderRadius : 5,
         alignItems : 'center'
     },
 

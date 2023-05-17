@@ -2,7 +2,7 @@ import { StyleSheet, Switch, Text, TouchableOpacity, View, ScrollView, Alert, Ac
 import React, { useState} from 'react'
 import { ref , set , get , update, remove , child , onValue} from 'firebase/database'
 import { auth, db, firestoreDB } from '../firebase'
-import { reload, sendPasswordResetEmail } from 'firebase/auth'
+import { deleteUser } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -43,17 +43,22 @@ const Userdatascreen =   () => {
     setLoading(false);
     }
    
-  async function deleteUser(id){
+  async function deleteUserDB(id){
+    
     await deleteDoc(doc(firestoreDB, "users", id))
     setReloadbitch(reloadbitch + 1)
 
   }
   async function getbyUsername(username){
+    if (username === 'Admin') {
+      return alert('Sorry, you cannot delete this user. The Admin profile has the highest privileges in the app and cannot be deleted.');
+    }
+    
     const usersRef = collection(firestoreDB, 'users')
     const q = query(usersRef, where('username', "==", username))
     const qdata = await getDocs(q)  
     qdata.forEach((user) => {
-       deleteUser(user.id)
+       deleteUserDB(user.id)
     })  
   }
   const AlertDelete = (username) => {
@@ -88,8 +93,8 @@ const goBackHome = () => {
 
 
 
-    const homebg = !infopage && !stockpage  ? '#00989d' : '#b5b5b5'
-    const infobg = infopage && !stockpage ? '#00989d' : '#b5b5b5'
+    const homebg = !infopage && !stockpage  ? '#02c38e' : '#b5b5b5'
+    const infobg = infopage && !stockpage ? '#02c38e' : '#b5b5b5'
 
     
     
@@ -106,10 +111,10 @@ const goBackHome = () => {
 
             
 
-<Text style={{fontSize : 30 , fontWeight : 'bold' , marginTop : 0, color : "#00989d"}}> <Icon name="users" size={30} color="#00989d" />  Users List</Text>
+<Text style={{fontSize : 30 , fontWeight : 'bold' , marginTop : 0, color : "#02c38e"}}> <Icon name="users" size={30} color="#02c38e" />  Users List</Text>
 
             <View style={{ height : '67%' , width : '97%' }}>
-                <ScrollView style={{paddingHorizontal : 10 , paddingVertical : 20, backgroundColor : '#2e2e2e' , borderRadius : 10}}>
+                <ScrollView style={{paddingHorizontal : 10 , paddingVertical : 20, backgroundColor : '#2e2e2e' , borderRadius : 7}}>
                           {Users.map((user) => (
                         //      <View key={user.username} style = {{backgroundColor : 'white',  width : '100%' , height : 118 ,borderWidth : 2, borderRadius : 10, padding : 5, flexDirection : 'row', marginBottom : 15, alignItems : 'center', }}>
                         //      <View style={{ flexDirection : 'column', width : '65%', height : '100%', padding : 5 }}>
@@ -121,17 +126,17 @@ const goBackHome = () => {
                         //      <Text style={{ fontSize : 17, fontWeight : 'bold', color : 'red'}}>Remove</Text>
                         //      </TouchableOpacity>
                         //  </View>
-                        <View key={user.username} style={{ width: '100%', height : 110 ,padding : 7, borderWidth : 2, borderColor : '#00989d', borderRadius : 10 , backgroundColor : '#2e2e2e', flexDirection : 'row', gap : 10, marginBottom : 10, }}>
-                                  <View style={{ width : '25%', height : '100%', backgroundColor : '#424242', borderRadius : 10 , justifyContent : 'center', alignItems : 'center'}}>
-                                          <Icon name="user-alt" size={scale(30)} color='white' />
+                        <View key={user.username} style={{ width: '100%', height : 95 ,padding : 7, borderWidth : 2, borderColor : '#02c38e', borderRadius : 7 , backgroundColor : '#2e2e2e', flexDirection : 'row', gap : 10, marginBottom : 15, }}>
+                                  <View style={{ width : '25%', height : '100%', backgroundColor : '#424242', borderRadius : 5 , justifyContent : 'center', alignItems : 'center'}}>
+                                          <Icon name="user-alt" size={scale(26)} color='white' />
                                   </View>
                                   <View style={{ height : '100%', paddingVertical : 5, justifyContent : 'center' }}>
                                     <Text style={{ fontSize : scale(18), fontWeight : 'bold', color : 'white' }}>{user.username}</Text>
                                     <Text style={{ fontSize : scale(12), color : 'gray' }}>{user.email}</Text>
-                                    <Text style={{ fontSize : scale(12),color  : `${user?.role == 'Admin' ? '#c32828': '#00989d'}`, fontWeight : 'bold' }}>{user.role}</Text>
+                                    <Text style={{ fontSize : scale(12),color  : `${user?.role == 'Admin' ? 'red': '#02c38e'}`, fontWeight : 'bold' }}>{user.role}</Text>
                                   </View>
-                                  <TouchableOpacity onPress={() => AlertDelete(user.username)} style={{ width : '20%', height : '100%', backgroundColor : '#424242', marginLeft : 'auto' , borderRadius : 10, justifyContent : 'center', alignItems : 'center' }}>
-                                        <IconX name="delete-forever" size={scale(30)} color="red" />
+                                  <TouchableOpacity onPress={() => AlertDelete(user.username)} style={{ width : '20%', height : '100%', backgroundColor : '#424242', marginLeft : 'auto' , borderRadius : 5, justifyContent : 'center', alignItems : 'center' }}>
+                                        <IconX name="delete-forever" size={scale(26)} color="red" />
                                   </TouchableOpacity>
                           </View>
                           ))} 
@@ -153,7 +158,7 @@ const goBackHome = () => {
                 </ScrollView>
             </View>
             <TouchableOpacity style={{justifyContent : 'center', width : '100%' , alignItems : 'center'}} onPress={goBackHome}>
-                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : "#00989d"}}>Home</Text></Text>
+                <Text style={{fontSize : 16 , color : 'gray' , marginTop : 20}}>Back to/ <Text style={{fontSize : 19 , color : 'black', fontWeight : 'bold' , marginTop : 20, color : "#02c38e"}}>Home</Text></Text>
             </TouchableOpacity>
             
 
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
   statscontainer : {
     width : '90%',
     height : '15%',
-    backgroundColor : '#00989d',
+    backgroundColor : '#02c38e',
     borderRadius : 20,
     flexDirection : 'row',
 
