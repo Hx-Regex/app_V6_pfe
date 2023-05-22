@@ -67,10 +67,10 @@ const ResetScreen = () => {
                     <TextInput
                         
                         placeholder="Email"
-                        placeholderTextColor='#424242'
+                        placeholderTextColor='white'
                         value={email}
                         onChangeText={text => setEmail(text)}
-                        style={[styles.input, isFocused && { backgroundColor: '#b9b9b9' , fontSize : 20}]}
+                        style={[styles.input, isFocused && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                     />

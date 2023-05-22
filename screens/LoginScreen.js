@@ -81,7 +81,6 @@ const LoginScreen = () => {
         }
       };
       
-      
     
 
 
@@ -113,9 +112,13 @@ const LoginScreen = () => {
  return (
 
 <>
-    <View style={{ position : 'absolute', width : '100%', height : '100%' , justifyContent : 'center', alignItems : 'center' , zIndex: 999, display : `${loading ? 'flex' : 'none'}`,backgroundColor : 'rgba(0, 0, 0, 0.4)'  }}>
-          <ActivityIndicator style={{}} size={60} />
-    </View>
+          <View style={{ position : 'absolute', width : '100%', height : '100%' , justifyContent : 'center', alignItems : 'center' , zIndex: 999, display : `${loading ? 'flex' : 'none'}`,backgroundColor : 'rgba(0, 0, 0, 0.42)' }}>
+          <View style={{ flexDirection : 'row', borderRadius : 5, width : 170, backgroundColor : 'white', height : 60, justifyContent : 'space-evenly', alignItems : 'center' }}>
+          <ActivityIndicator style={{}} size={50} color='#02c38e' />
+          <Text style={{ fontWeight : 'bold', fontSize : 15, color : '#02c38e'}}>Logging IN..</Text>
+          </View>
+          </View>
+
     <KeyboardAvoidingView
         style={styles.container}
     >
@@ -138,7 +141,7 @@ const LoginScreen = () => {
                         placeholderTextColor='white'
                         value={username}
                         onChangeText={text => SetUsername(text)}
-                        style={[styles.input, isFocused && { backgroundColor: '#bababa' , fontSize : 20}]}
+                        style={[styles.input, isFocused && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                     />
@@ -149,7 +152,7 @@ const LoginScreen = () => {
                 placeholderTextColor='white'
                 value={password}
                 onChangeText={text => setPassword(text)}
-                style={[styles.input, isFocused2 && { backgroundColor: '#bababa' , fontSize : 20}]}
+                style={[styles.input, isFocused2 && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus2}
                         onBlur={handleBlur2}
                 secureTextEntry

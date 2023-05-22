@@ -64,7 +64,7 @@ const Userdatascreen =   () => {
   const AlertDelete = (username) => {
     Alert.alert(
       'Delete User',
-      'Are you sure you want to delete this user?',
+      `Are you sure you want to delete ${username}?`,
       [
         {
           text: 'Cancel',
@@ -103,9 +103,12 @@ const goBackHome = () => {
 <>
 
     
-    <View style={{ position : 'absolute', width : '100%', height : '100%' , justifyContent : 'center', alignItems : 'center' , zIndex: 999, display : `${loading ? 'flex' : 'none'}`,backgroundColor : 'rgba(0, 0, 0, 0.4)'  }}>
-          <ActivityIndicator style={{}} size={60} />
-    </View>
+          <View style={{ position : 'absolute', width : '100%', height : '100%' , justifyContent : 'center', alignItems : 'center' , zIndex: 999, display : `${loading ? 'flex' : 'none'}`,backgroundColor : 'rgba(0, 0, 0, 0.42)' }}>
+                <View style={{ flexDirection : 'row', borderRadius : 5, width : 180, backgroundColor : 'white', height : 60, justifyContent : 'space-evenly', alignItems : 'center' }}>
+                      <ActivityIndicator style={{}} size={50} color='#02c38e' />
+                      <Text style={{ fontWeight : 'bold', fontSize : 15, color : '#02c38e'}}>Fetching Users..</Text>
+                </View>
+          </View>
     <View style={styles.container}>
 
 

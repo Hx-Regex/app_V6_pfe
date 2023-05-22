@@ -9,20 +9,18 @@
     "splash": {
       "image": "./assets/images/splashi.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1c1c1c"
+      "backgroundColor": "#02c38e"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier" : "com.Smartcaf.cafeteria",
-      "buildNumber": "2"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-iconi.png",
-        "backgroundColor": "#1c1c1c"
+        "backgroundColor": "#02c38e"
       },
       "package": "com.hxdev.app_v4"
     },

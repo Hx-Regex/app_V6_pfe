@@ -130,7 +130,7 @@ const handleSignUp = async () => {
                         placeholderTextColor='white'
                         value={username}
                         onChangeText={text => setUsername(text)}
-                        style={[styles.input, isFocused3 && { backgroundColor: '#bababa' , fontSize : 20}]}
+                        style={[styles.input, isFocused3 && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus3}
                         onBlur={handleBlur3}
                     />
@@ -141,7 +141,7 @@ const handleSignUp = async () => {
                         value={email}
                         placeholderTextColor='white'
                         onChangeText={text => setEmail(text)}
-                        style={[styles.input, isFocused && { backgroundColor: '#bababa' , fontSize : 20}]}
+                        style={[styles.input, isFocused && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                     />
@@ -152,7 +152,7 @@ const handleSignUp = async () => {
                 value={password}
                 placeholderTextColor='white'
                 onChangeText={text => setPassword(text)}
-                style={[styles.input, isFocused2 && { backgroundColor: '#bababa' , fontSize : 20}]}
+                style={[styles.input, isFocused2 && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus2}
                         onBlur={handleBlur2}
                 secureTextEntry

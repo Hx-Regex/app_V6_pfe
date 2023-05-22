@@ -102,7 +102,6 @@ const HomeScreen = () => {
       const updatedAllValue = {
         ...allValue,
         Window: !windowMGR,
-        State : !windowMGR
       };
       
       set(allRef, updatedAllValue);
@@ -264,9 +263,12 @@ useEffect(() => {
         
     // </View>
 <>  
-    <View style={{ position : 'absolute', width : '100%', height : '100%' , justifyContent : 'center', alignItems : 'center' , zIndex: 999, display : `${loading ? 'flex' : 'none'}`,backgroundColor : 'rgba(0, 0, 0, 0.4)'  }}>
-          <ActivityIndicator style={{}} size={60} />
-    </View>
+          <View style={{ position : 'absolute', width : '100%', height : '100%' , justifyContent : 'center', alignItems : 'center' , zIndex: 999, display : `${loading ? 'flex' : 'none'}`,backgroundColor : 'rgba(0, 0, 0, 0.42)' }}>
+                <View style={{ flexDirection : 'row', borderRadius : 5, width : 170, backgroundColor : 'white', height : 60, justifyContent : 'space-evenly', alignItems : 'center' }}>
+                      <ActivityIndicator style={{}} size={50} color='#02c38e' />
+                      <Text style={{ fontWeight : 'bold', fontSize : 15, color : '#02c38e'}}>Fetching Data..</Text>
+                </View>
+          </View>
 
     <View style={styles.container}>
               {
@@ -278,7 +280,7 @@ useEffect(() => {
                           <Icon name="temperature-high" size={scale(30)} color="#02c38e" />
                     </View>
                     <Text style={{ fontSize : scale(16), fontWeight : 'bold', color : 'white' }}>Temperature</Text>
-                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#02c38e'}}>{Temperature}°C</Text>
+                    <Text style={{ fontSize : scale(25), fontWeight : 'bold' , color : '#02c38e' , alignItems : 'center'}}>{Temperature}°C</Text>
                
                
                </View>
@@ -304,10 +306,10 @@ useEffect(() => {
 
                   }}
                 >
-                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : '#2d2d2d', padding : 0, borderBottomStartRadius : 7 , borderBottomEndRadius : 0, borderTopEndRadius : 0, borderTopStartRadius : 7, borderWidth : 0, borderColor : '#02c38e'  }}>
-                          <View style= {{ width : '45%' , height : '100%', alignItems : 'center', justifyContent : 'space-evenly' }}>
-                                <View style={{ width : scale(75), height : scale(75), backgroundColor : '#434343', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
-                                     <IconX name="window-closed-variant" size={verticalScale(40)} color="#02c38e" />
+                    <View style= {{ width : '70%' , height : '100%', flexDirection : 'row' , backgroundColor  : '#2d2d2d', padding : 0, borderBottomStartRadius : 7 , borderBottomEndRadius : 7, borderTopEndRadius : 7, borderTopStartRadius : 7, borderWidth : 0, borderColor : '#02c38e'  }}>
+                          <View style= {{ width : '40%' , height : '100%', alignItems : 'center', justifyContent : 'space-evenly' }}>
+                                <View style={{ width : scale(70), height : scale(70), backgroundColor : '#434343', borderRadius : 100, justifyContent : 'center', alignItems : 'center' }}>
+                                     <IconX name="window-closed-variant" size={verticalScale(35)} color="#02c38e" />
                                      
                                 </View>
                                 <Switch
@@ -335,13 +337,13 @@ useEffect(() => {
                                   <Text
                                      style={{ fontSize: scale(14), fontWeight: "bold", color: "gray", marginTop : 'auto' }}
                                    >
-                                     Window is {windowState ? "Opened" : "Closed"} 
+                                     Window is<Text style={{ color : `${windowState ? "#02c38e" : "red"}` }}> {windowState ? "Opened" : "Closed"}  </Text>
                                   </Text>
                           </View>
                     </View>
                     {/* {windowMGR ? "Close" : "Open"} */}
 
-                    <TouchableOpacity onPress={writeOpenWindow} style= {{ width : '28%' , height : '100%', justifyContent : 'center', alignItems : 'center' , backgroundColor  :windowbtn   , borderBottomStartRadius : 0 , borderBottomEndRadius : 7, borderTopEndRadius : 7, borderTopStartRadius : 0 }}>
+                    <TouchableOpacity onPress={writeOpenWindow} style= {{ width : '28%' , height : '100%', justifyContent : 'center', alignItems : 'center' , backgroundColor  :windowbtn   , borderBottomStartRadius : 7 , borderBottomEndRadius : 7, borderTopEndRadius : 7, borderTopStartRadius : 7 }}>
                               <Text style={{ fontSize : scale(22), fontWeight : 'bold', color : 'white' }}>{windowAuto ? "Auto" : `${windowMGR ? "Close" : "Open"}`}</Text>
                     </TouchableOpacity>
                     
@@ -475,7 +477,7 @@ useEffect(() => {
                         </View>
                   </View>
 
-                  <View style={{ width : '90%', height : '40%',borderWidth : 0, borderColor : '#2b78d5', backgroundColor : '#2e2e2e', borderRadius : 7 }}>
+                  <View style={{ width : '90%', height : '40%',borderWidth : 0, borderColor : '#2b78d5', backgroundColor : '#2e2e2e', borderRadius : 7}}>
                     <TouchableOpacity onPress={handlereset} style={{ width : '100%', height  : 'auto', padding : 19,borderColor : '#424242', borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
                                 <Icon name="user-lock" size={27} color="#8d8d8d" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d'  }}>Reset Password</Text>
