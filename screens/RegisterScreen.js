@@ -1,7 +1,6 @@
 import { KeyboardAvoidingView,Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,  } from 'firebase/auth';
-import { doc, setDoc } from "firebase/firestore";
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,6 +8,9 @@ import CheckBox from 'expo-checkbox';
 import { firestoreDB } from '../firebase';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import moment from 'moment';
+import { doc, setDoc, getDocs,getDoc , collection, query, where } from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
 
 
 const RegisterScreen = () => {
@@ -20,6 +22,7 @@ const RegisterScreen = () => {
     const [user, setUser] = useState()
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+    const [userData , setUserData] = useState();
 
 
 
@@ -30,7 +33,16 @@ const RegisterScreen = () => {
 
 
       
-
+      async function getDataFromDb() {
+        const docRef = doc(firestoreDB, "users", auth.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        setUserData(data);
+      }
+      useEffect(() => {     
+        getDataFromDb();
+      }, []);
+      
 const handleSignUp = async () => {
     if (!username || !password || !email || !value) {
       alert("Please fill in all required fields.");
@@ -48,6 +60,16 @@ const handleSignUp = async () => {
           username: username,
           role: value // You can set the role to a default value or ask the user to select their role during sign-up.
         });
+      });
+
+      const currentDate = moment().format('DD/MM/YYYY [at] HH:mm:ss');
+      const userRef = doc(firestoreDB, 'Logs', uuidv4());
+      setDoc(userRef, { 
+        user: userData.username,
+        date: currentDate,
+        action: `Created New User Named ${username} , With ${value} Role`,
+        tag : 'User',
+        role : userData.role,
       });
       alert("User Added Successfully")
       navigation.replace('Login');

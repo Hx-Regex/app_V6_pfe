@@ -10,13 +10,15 @@ import IconX from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect } from 'react'
 import { doc, setDoc, getDocs,getDoc , collection, query, where } from "firebase/firestore";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 const HomeScreen = () => {
       
 
   const navigation = useNavigation()
-  const [LEDValue, setLEDValue] = useState(false)
-  const [stocknotif , setStocknotif] = useState(false)
 
 
   const [Temperature, setTemperature] = useState(0)
@@ -28,9 +30,6 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false)
 
 
-
-  const [tempNotif, setTempNotif] = useState(false)
-  const [testauth , setTestauth] = useState('')
   const [userData, setUserData] = useState(null)
   const [infopage, setInfopage ] = useState(false)
   const [stockpage , setStockpage] = useState(false)
@@ -78,6 +77,9 @@ const HomeScreen = () => {
   const handleDeleteUser = () => {
     navigation.replace("Users")
   }
+  const handleLogs = () => {
+    navigation.replace("Logs")
+  }
 
   const writeAutoWind = async () => {
     const allRef = ref(db, 'All');
@@ -91,6 +93,19 @@ const HomeScreen = () => {
     };
     
     set(allRef, updatedAllValue);
+
+
+
+    const currentDate = moment().format('DD/MM/YYYY [at] HH:mm:ss');
+    const userRef = doc(firestoreDB, 'Logs', uuidv4());
+    setDoc(userRef, { 
+      user: userData.username,
+      date: currentDate,
+      action: `${!windowAuto ? 'Switched from MANUAL MODE to AUTOMATIC MODE' : 'Switched from AUTOMATIC MODE to MANUAL MODE' }`,
+      tag : 'Window',
+      role : userData.role,
+    });
+    
     
   };
   const writeOpenWindow = async () => {
@@ -105,6 +120,16 @@ const HomeScreen = () => {
       };
       
       set(allRef, updatedAllValue);
+
+      const currentDate = moment().format('DD/MM/YYYY [at] HH:mm:ss');
+      const userRef = doc(firestoreDB, 'Logs', uuidv4());
+      setDoc(userRef, { 
+        user: userData.username,
+        date: currentDate,
+        action: `${!windowMGR ? 'Opened The Window' : 'Closed The Window' }`,
+        tag : 'Window',
+        role : userData.role,
+      });
 
     }
   
@@ -214,9 +239,7 @@ useEffect(() => {
 
 
    
-    const stocknotifbg = stocknotif ? '#2b79d5' : '#b5b5b5'
-    const windowbg = windowMGR ? '#2b79d5' : '#b5b5b5'
-    const temponotifbg = tempNotif ? '#2b79d5' : '#b5b5b5'
+    // const windowbg = windowMGR ? '#2b79d5' : '#b5b5b5'
     const homebg = !infopage && !stockpage  ? '#02c38e' : '#424242'
     const infobg = infopage && !stockpage ? '#02c38e' : '#424242'
     const  windowbtn = windowAuto ? '#2e2e2e' : `${windowMGR ? 'red' : '#02c38e'}`
@@ -477,7 +500,7 @@ useEffect(() => {
                         </View>
                   </View>
 
-                  <View style={{ width : '90%', height : '40%',borderWidth : 0, borderColor : '#2b78d5', backgroundColor : '#2e2e2e', borderRadius : 7}}>
+                  <View style={{ width : '90%', height : '55%',borderWidth : 0, borderColor : '#2b78d5', backgroundColor : '#2e2e2e', borderRadius : 7}}>
                     <TouchableOpacity onPress={handlereset} style={{ width : '100%', height  : 'auto', padding : 19,borderColor : '#424242', borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
                                 <Icon name="user-lock" size={27} color="#8d8d8d" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d'  }}>Reset Password</Text>
@@ -486,10 +509,15 @@ useEffect(() => {
                                 <Icon name="users" size={27} color="#8d8d8d" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d'  }}>Users List</Text>
                     </TouchableOpacity> : ''}
+                    { userData?.role == 'Admin' ?  <TouchableOpacity onPress={handleLogs} style={{ width : '100%', height  : 'auto',borderColor : '#424242', padding : 19, borderBottomWidth : 2, alignItems : 'center', flexDirection  :'row', gap : 10 }}>
+                                <IconX name="notebook-edit-outline" size={27} color="#8d8d8d" />
+                                <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d'  }}>App Logs</Text>
+                    </TouchableOpacity> : ''}
                     <TouchableOpacity onPress={handleSignOut} style={{ width : '100%', height  : 'auto', marginTop  : 'auto',padding : 19, borderTopWidth : 2,borderColor : '#424242', alignItems : 'center', flexDirection  :'row', gap : 10 }}>
                                 <Icon name="sign-out-alt" size={27} color="#8d8d8d" />
                                 <Text style={{ fontWeight  : 'bold', fontSize : scale(15), color : '#8d8d8d' }}>Log Out</Text>
                     </TouchableOpacity>
+                  
 
                   </View>
                 </>

@@ -10,6 +10,8 @@ import IconX from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect } from 'react'
 import { doc, setDoc, getDocs,getDoc , collection, query, where, deleteDoc } from "firebase/firestore";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 
 const Userdatascreen =   () => {
 
@@ -60,6 +62,18 @@ const Userdatascreen =   () => {
     qdata.forEach((user) => {
        deleteUserDB(user.id)
     })  
+
+    
+    const currentDate = moment().format('DD/MM/YYYY [at] HH:mm:ss');
+    const userRef = doc(firestoreDB, 'Logs', uuidv4());
+    setDoc(userRef, { 
+      user: userData.username,
+      date: currentDate,
+      action: `Deleted ${username} From Ther Users`,
+      tag : 'User',
+      role : userData.role,
+    });
+
   }
   const AlertDelete = (username) => {
     Alert.alert(
@@ -130,15 +144,15 @@ const goBackHome = () => {
                         //      </TouchableOpacity>
                         //  </View>
                         <View key={user.username} style={{ width: '100%', height : 95 ,padding : 7, borderWidth : 2, borderColor : '#02c38e', borderRadius : 7 , backgroundColor : '#2e2e2e', flexDirection : 'row', gap : 10, marginBottom : 15, }}>
-                                  <View style={{ width : '25%', height : '100%', backgroundColor : '#424242', borderRadius : 5 , justifyContent : 'center', alignItems : 'center'}}>
-                                          <Icon name="user-alt" size={scale(26)} color='white' />
+                                  <View style={{ width : '20%', height : '100%', backgroundColor : '#424242', borderRadius : 5 , justifyContent : 'center', alignItems : 'center'}}>
+                                          <Icon name="user-alt" size={scale(24)} color='white' />
                                   </View>
                                   <View style={{ height : '100%', paddingVertical : 5, justifyContent : 'center' }}>
                                     <Text style={{ fontSize : scale(18), fontWeight : 'bold', color : 'white' }}>{user.username}</Text>
                                     <Text style={{ fontSize : scale(12), color : 'gray' }}>{user.email}</Text>
                                     <Text style={{ fontSize : scale(12),color  : `${user?.role == 'Admin' ? 'red': '#02c38e'}`, fontWeight : 'bold' }}>{user.role}</Text>
                                   </View>
-                                  <TouchableOpacity onPress={() => AlertDelete(user.username)} style={{ width : '20%', height : '100%', backgroundColor : '#424242', marginLeft : 'auto' , borderRadius : 5, justifyContent : 'center', alignItems : 'center' }}>
+                                  <TouchableOpacity onPress={() => AlertDelete(user.username)} style={{ width : '16%', height : '100%', backgroundColor : '#424242', marginLeft : 'auto' , borderRadius : 5, justifyContent : 'center', alignItems : 'center' }}>
                                         <IconX name="delete-forever" size={scale(26)} color="red" />
                                   </TouchableOpacity>
                           </View>

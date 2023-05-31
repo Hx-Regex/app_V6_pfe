@@ -6,12 +6,16 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CheckBox from 'expo-checkbox';
 import { doc, setDoc, getDocs, collection, query, where } from "firebase/firestore";
+import Icon from 'react-native-vector-icons/Feather';
+import IconX from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const LoginScreen = () => {
     const [password , setPassword]  = useState('')
     const [username , SetUsername] = useState('')
     const [rememberMe , setRememberMe] = useState(false)
     const [smartEmail , setSmartEmail] = useState('')
+    const [showpass, setShowpass] = useState(false);
     const [user, setUser] = useState()
     const navigation = useNavigation()
 
@@ -80,6 +84,9 @@ const LoginScreen = () => {
           setLoading(false); // Stop loading state
         }
       };
+
+
+      
       
     
 
@@ -134,29 +141,39 @@ const LoginScreen = () => {
 
 
       <View style={styles.inputContainer}>
- 
+      <View style={{ flexDirection : 'row' , width : '100%', alignItems : 'center' , marginTop : 20}}>
+              <View style={{ height: 60, width : '15%', borderBottomLeftRadius : 5,borderTopLeftRadius : 5, backgroundColor :`${isFocused ? '#02c38e' : '#2e2e2e'}`, borderBottomWidth : 3 , borderColor : '#02c38e' , justifyContent : 'center', alignItems : 'center'}}>
+                  <Icon name="user" size={27} color={`${isFocused ? 'white' : '#8d8d8d'}`} />
+              </View>
                     <TextInput
                         
                         placeholder="Username"
-                        placeholderTextColor='white'
+                        placeholderTextColor={`${isFocused ? 'white' : '#8d8d8d'}`}
                         value={username}
                         onChangeText={text => SetUsername(text)}
                         style={[styles.input, isFocused && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                     />
-
-           
+      </View>
+           <View style={{ flexDirection : 'row' , width : '100%', alignItems : 'center' , marginTop : 20}}>
+              <View style={{ height: 60, width : '15%', borderBottomLeftRadius : 5,borderTopLeftRadius : 5, backgroundColor :`${isFocused2 ? '#02c38e' : '#2e2e2e'}`, borderBottomWidth : 3 , borderColor : '#02c38e' , justifyContent : 'center', alignItems : 'center'}}>
+                  <Icon name="lock" size={27} color={`${isFocused2 ? 'white' : '#8d8d8d'}`} />
+              </View>
             <TextInput
                 placeholder="Password"
-                placeholderTextColor='white'
+                placeholderTextColor={`${isFocused2 ? 'white' : '#8d8d8d'}`}
                 value={password}
                 onChangeText={text => setPassword(text)}
-                style={[styles.input, isFocused2 && { backgroundColor: '#02c38e' , fontSize : 20}]}
+                style={[styles.input2, isFocused2 && { backgroundColor: '#02c38e' , fontSize : 20}]}
                         onFocus={handleFocus2}
                         onBlur={handleBlur2}
-                secureTextEntry
+                secureTextEntry={!showpass}
             />
+              <View style={{ height: 60, width : '15%', borderBottomRightRadius : 5,borderTopRightRadius : 5, backgroundColor :`${isFocused2 ? '#02c38e' : '#2e2e2e'}`, borderBottomWidth : 3 , borderColor : '#02c38e' , justifyContent : 'center', alignItems : 'center'}}>
+                  <TouchableOpacity onPress={() => setShowpass(!showpass)}>{!showpass ?  <Icon name="eye" size={27} color={`${isFocused2 ? 'white' : '#02c38e'}`} /> : <Icon name="eye-off" size={27} color={`${isFocused2 ? 'white' : '#02c38e'}`} />}</TouchableOpacity>
+              </View>
+            </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent : 'space-between', width: '100%',  marginTop : 20,}}>
 
         
@@ -214,19 +231,32 @@ const styles = StyleSheet.create({
         width: '80%'
     },
 
-    input : {
+    input2 : {
         paddingHorizontal : 15,
         height : 60,
+        width : '70%',
         fontWeight : 'bold',
         color : 'white',
         fontSize : 17,
         paddingVertical : 10,
-        borderRadius : 5,
         borderBottomWidth : 3,
         backgroundColor : '#2e2e2e',
         borderBottomColor : '#02c38e',
-        marginTop : 20 ,
     },
+    input : {
+      paddingHorizontal : 15,
+      height : 60,
+      width : '85%',
+      fontWeight : 'bold',
+      color : 'white',
+      fontSize : 17,
+      paddingVertical : 10,
+      borderBottomWidth : 3,
+      backgroundColor : '#2e2e2e',
+      borderBottomColor : '#02c38e',
+      borderBottomRightRadius : 5,
+      borderTopRightRadius : 5,
+  },
 
     buttonContainer : {
         width : '100%',
